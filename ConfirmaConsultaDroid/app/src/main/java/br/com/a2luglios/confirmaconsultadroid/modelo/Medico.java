@@ -71,7 +71,15 @@ public class Medico {
         values.put("nome", nome);
         values.put("especialidade", especialidade);
         values.put("oQueAtende", oQueAtende);
-        values.put("consultorios", "null");
+
+        String listaConsultorios = "{";
+        for ( int i = 0 ; i < consultorios.size() ; i++ ) {
+            listaConsultorios += consultorios.get(i).getId();
+            if ( i < consultorios.size() ) listaConsultorios += ",";
+        }
+        listaConsultorios += "}";
+        values.put("consultorios", listaConsultorios);
+
         values.put("googleId", googleId);
         return values;
     }

@@ -92,7 +92,15 @@ public class Consultorio {
         values.put("bairro", bairro);
         values.put("cidade", cidade);
         values.put("estado", estado);
-        values.put("medicos", "null");
+
+        String listaMedicos = "{";
+        for (int i = 0 ; i < medicos.size() ; i++ ){
+            listaMedicos += medicos.get(i).getId();
+            if ( i < medicos.size() ) listaMedicos += ",";
+        }
+        listaMedicos += "}";
+
+        values.put("medicos", listaMedicos);
         return values;
     }
 }

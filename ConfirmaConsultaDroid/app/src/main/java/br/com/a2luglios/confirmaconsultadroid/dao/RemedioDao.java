@@ -62,6 +62,7 @@ public class RemedioDao {
 
             Medico medico = new Medico();
             medico.setId(cursor.getLong(cursor.getColumnIndex("medico")));
+            medico = new MedicoDao(bancoUtil).getMedicoPorId(medico);
             remedio.setMedico(medico);
 
             remedios.add(remedio);

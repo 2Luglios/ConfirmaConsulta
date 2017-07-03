@@ -8,6 +8,7 @@ import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.modelo.Confirmacao;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Consulta;
+import br.com.a2luglios.confirmaconsultadroid.modelo.Consultorio;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Medico;
 import br.com.a2luglios.confirmaconsultadroid.util.BancoUtil;
 
@@ -21,7 +22,8 @@ public class ConsultaDao {
     private BancoUtil bancoUtil;
     public static final String CREATE_QUERY = "CREATE TABLE " + TABELA + " (" +
             "id INTEGER PRIMARY KEY," +
-            "medico id," +
+            "medicoId INTEGER," +
+            "consultorioId INTEGER," +
             "data INTEGER," +
             "horasAntesAviso INTEGER," +
             "confirmacao TEXT" +
@@ -57,11 +59,16 @@ public class ConsultaDao {
 
             Medico medico = new Medico();
             medico.setId(cursor.getLong(cursor.getColumnIndex("medico")));
+            medico = new MedicoDao(bancoUtil).getMedicoPorId(medico);
             consulta.setMedico(medico);
 
             Calendar data = Calendar.getInstance();
             data.setTimeInMillis(cursor.getLong(cursor.getColumnIndex("data")));
             consulta.setData(data);
+
+            Consultorio consultorio = new Consultorio();
+            consultorio.setId(cursor.getLong(cursor.getColumnIndex("consultorio")));
+            consultorio = new ConsultorioDao(bancoUtil).getConsultorioPorId(consultorio);
 
             consulta.setConfirmacao(Confirmacao.valueOf(cursor.getString(cursor.getColumnIndex("confirmacao"))));
 

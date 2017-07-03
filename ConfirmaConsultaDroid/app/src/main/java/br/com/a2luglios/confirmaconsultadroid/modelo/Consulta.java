@@ -14,6 +14,7 @@ public class Consulta {
     private Medico medico;
     private Calendar data;
     private Confirmacao confirmacao;
+    private Consultorio consultorio;
     private int horasAntesAviso;
 
     public Long getId() {
@@ -63,6 +64,15 @@ public class Consulta {
         values.put("data", data.getTimeInMillis());
         values.put("confirmacao", confirmacao.name());
         values.put("horasAntesAviso", horasAntesAviso);
+        values.put("consultorio", consultorio.getId());
         return values;
+    }
+
+    public Consultorio getConsultorio() {
+        return consultorio;
+    }
+
+    public void setConsultorio(Consultorio consultorio) {
+        this.consultorio = consultorio;
     }
 }

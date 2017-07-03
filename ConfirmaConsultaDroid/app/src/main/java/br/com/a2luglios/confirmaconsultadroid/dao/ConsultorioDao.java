@@ -2,6 +2,11 @@ package br.com.a2luglios.confirmaconsultadroid.dao;
 
 import android.database.Cursor;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONStringer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +29,8 @@ public class ConsultorioDao {
             "cep TEXT," +
             "bairro TEXT," +
             "cidade TEXT," +
-            "estado TEXT" +
+            "estado TEXT," +
+            "medicos TEXT" +
             ");";
     public static final String UPDATE_QUERY = "";
 
@@ -54,7 +60,22 @@ public class ConsultorioDao {
         consultorio.setCidade(cursor.getString(cursor.getColumnIndex("cidade")));
         consultorio.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
         consultorio.setEstado(cursor.getString(cursor.getColumnIndex("estado")));
-        consultorio.setMedicos(null);
+
+        List<Medico> medicos = new ArrayList<>();
+        try {
+            String listaMedicos = cursor.getString(cursor.getColumnIndex("medicos"));
+            JSONArray o = new JSONArray(listaMedicos);
+            for (int i = 0; i < o.length(); i++) {
+                Medico medico = new Medico();
+                medico.setId(o.getLong(i));
+                medico = new MedicoDao(bancoUtil).getMedicoPorId(medico);
+                medicos.add(medico);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        consultorio.setMedicos(medicos);
+
         return consultorio;
     }
 
