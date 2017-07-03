@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<!--redir-->
+<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<WISPAccessGatewayParam
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="https://gia-apc.it-solutions.atos.net/sci/GenericAccess.xsd">
+  <Redirect>
+     <AccessProcedure>1.0</AccessProcedure>
+     <AccessLocation>SAG_SAO_SP_WLC</AccessLocation>
+     <LocationName>SAG_SAO_SP_WLC</LocationName>
+     <LoginURL>https://gia-apc.it-solutions.atos.net/sci/process</LoginURL>
+     <AbortLoginURL>https://gia-apc.it-solutions.atos.net/sci/logoff</AbortLoginURL>
+     <MessageType>100</MessageType> 
+     <ResponseCode>0</ResponseCode>
+  </Redirect>
+</WISPAccessGatewayParam>
+-->
+ <HEAD>
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <META HTTP-EQUIV="Expires" CONTENT="-1">
+  <META http-equiv="Refresh" content="1; url=http://gia-apc.it-solutions.atos.net/cgi-bin/auto?key=siemens_login_eng-771bade6c6a910153c9a05d6c8d153ea&url=http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+  <TITLE>Forwarding...</TITLE>
+ </HEAD>
+ <BODY>
+  <p>
+   <a href="http://gia-apc.it-solutions.atos.net/cgi-bin/auto?key=siemens_login_eng-771bade6c6a910153c9a05d6c8d153ea&url=http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">Continue</a>
+  </p>
+ </BODY>
+</HTML>
