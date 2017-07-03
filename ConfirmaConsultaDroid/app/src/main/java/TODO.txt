@@ -1,1 +1,16 @@
-Uma tabela para linkar medicos e consultorios e remedios
+especialidades e consultorios por geoposicionamento e proximidade
+
+Telas.
+
+1- Splash
+2- Login
+3- Autenticados
+4- Lista Consultas
+5- Adicionar consulta com filtro de medicos, especialidades, consultorios ordenados por localizacao
+6- Lista de Remedios
+7- Adicionar remedios com lembretes
+***** Tudo com abas inferiores******
+8- Compra de remedios baratos e combo
+9- gps para o consultorio
+10- lembrete de consulta e remedios
+11- Notificacoes de confirmacao de consulta
