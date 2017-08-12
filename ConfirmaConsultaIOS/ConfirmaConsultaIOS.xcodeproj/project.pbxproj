@@ -1,0 +1,765 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1F210ADA1F3F21190037F19C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F210AD91F3F21190037F19C /* AppDelegate.swift */; };
+		1F210ADC1F3F21190037F19C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F210ADB1F3F21190037F19C /* ViewController.swift */; };
+		1F210ADF1F3F21190037F19C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F210ADD1F3F21190037F19C /* Main.storyboard */; };
+		1F210AE21F3F21190037F19C /* ConfirmaConsultaIOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F210AE01F3F21190037F19C /* ConfirmaConsultaIOS.xcdatamodeld */; };
+		1F210AE41F3F21190037F19C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F210AE31F3F21190037F19C /* Assets.xcassets */; };
+		1F210AE71F3F21190037F19C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F210AE51F3F21190037F19C /* LaunchScreen.storyboard */; };
+		1F210AF21F3F21190037F19C /* ConfirmaConsultaIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F210AF11F3F21190037F19C /* ConfirmaConsultaIOSTests.swift */; };
+		1F210AFD1F3F21190037F19C /* ConfirmaConsultaIOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F210AFC1F3F21190037F19C /* ConfirmaConsultaIOSUITests.swift */; };
+		1F210B0B1F3F221B0037F19C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F210B0A1F3F221B0037F19C /* GoogleService-Info.plist */; };
+		38CD00F292C703837825BA0F /* Pods_ConfirmaConsultaIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80961D0E91339579E4503055 /* Pods_ConfirmaConsultaIOS.framework */; };
+		AB01CD5D2940E67CB663FB6A /* Pods_ConfirmaConsultaIOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC5ADD9C0D3A4F3BA36E05F /* Pods_ConfirmaConsultaIOSUITests.framework */; };
+		CBD352B815F8969DED3B4BC0 /* Pods_ConfirmaConsultaIOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46894EFD5CA275C2F03C75A /* Pods_ConfirmaConsultaIOSTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1F210AEE1F3F21190037F19C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F210ACE1F3F21190037F19C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F210AD51F3F21190037F19C;
+			remoteInfo = ConfirmaConsultaIOS;
+		};
+		1F210AF91F3F21190037F19C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F210ACE1F3F21190037F19C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F210AD51F3F21190037F19C;
+			remoteInfo = ConfirmaConsultaIOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1BC07A55F21B10ABE8A6E2B6 /* Pods-ConfirmaConsultaIOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfirmaConsultaIOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConfirmaConsultaIOSUITests/Pods-ConfirmaConsultaIOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1F210AD61F3F21190037F19C /* ConfirmaConsultaIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConfirmaConsultaIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F210AD91F3F21190037F19C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1F210ADB1F3F21190037F19C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1F210ADE1F3F21190037F19C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1F210AE11F3F21190037F19C /* ConfirmaConsultaIOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConfirmaConsultaIOS.xcdatamodel; sourceTree = "<group>"; };
+		1F210AE31F3F21190037F19C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1F210AE61F3F21190037F19C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1F210AE81F3F21190037F19C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F210AED1F3F21190037F19C /* ConfirmaConsultaIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfirmaConsultaIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F210AF11F3F21190037F19C /* ConfirmaConsultaIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmaConsultaIOSTests.swift; sourceTree = "<group>"; };
+		1F210AF31F3F21190037F19C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F210AF81F3F21190037F19C /* ConfirmaConsultaIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfirmaConsultaIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F210AFC1F3F21190037F19C /* ConfirmaConsultaIOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmaConsultaIOSUITests.swift; sourceTree = "<group>"; };
+		1F210AFE1F3F21190037F19C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F210B0A1F3F221B0037F19C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1F210B0C1F3F406A0037F19C /* ConfirmaConsultaIOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ConfirmaConsultaIOS.entitlements; sourceTree = "<group>"; };
+		23B2A8425537DA515C57FF24 /* Pods-ConfirmaConsultaIOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfirmaConsultaIOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ConfirmaConsultaIOSUITests/Pods-ConfirmaConsultaIOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3B32161B5F4E4F38D6F1E6A9 /* Pods-ConfirmaConsultaIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfirmaConsultaIOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ConfirmaConsultaIOS/Pods-ConfirmaConsultaIOS.release.xcconfig"; sourceTree = "<group>"; };
+		3B9FE8889206F342A420F342 /* Pods-ConfirmaConsultaIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfirmaConsultaIOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConfirmaConsultaIOS/Pods-ConfirmaConsultaIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		4FC5ADD9C0D3A4F3BA36E05F /* Pods_ConfirmaConsultaIOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConfirmaConsultaIOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		80961D0E91339579E4503055 /* Pods_ConfirmaConsultaIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConfirmaConsultaIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9CBEF571C63E90A57677D19 /* Pods-ConfirmaConsultaIOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfirmaConsultaIOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConfirmaConsultaIOSTests/Pods-ConfirmaConsultaIOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E5044792649E67AFFEA68418 /* Pods-ConfirmaConsultaIOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfirmaConsultaIOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ConfirmaConsultaIOSTests/Pods-ConfirmaConsultaIOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		F46894EFD5CA275C2F03C75A /* Pods_ConfirmaConsultaIOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConfirmaConsultaIOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1F210AD31F3F21190037F19C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38CD00F292C703837825BA0F /* Pods_ConfirmaConsultaIOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F210AEA1F3F21190037F19C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBD352B815F8969DED3B4BC0 /* Pods_ConfirmaConsultaIOSTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F210AF51F3F21190037F19C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB01CD5D2940E67CB663FB6A /* Pods_ConfirmaConsultaIOSUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1F210ACD1F3F21190037F19C = {
+			isa = PBXGroup;
+			children = (
+				1F210AD81F3F21190037F19C /* ConfirmaConsultaIOS */,
+				1F210AF01F3F21190037F19C /* ConfirmaConsultaIOSTests */,
+				1F210AFB1F3F21190037F19C /* ConfirmaConsultaIOSUITests */,
+				1F210AD71F3F21190037F19C /* Products */,
+				2D6C9C34CCB85AA846492D67 /* Pods */,
+				4E078A0B3B218645E5198CBB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1F210AD71F3F21190037F19C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1F210AD61F3F21190037F19C /* ConfirmaConsultaIOS.app */,
+				1F210AED1F3F21190037F19C /* ConfirmaConsultaIOSTests.xctest */,
+				1F210AF81F3F21190037F19C /* ConfirmaConsultaIOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1F210AD81F3F21190037F19C /* ConfirmaConsultaIOS */ = {
+			isa = PBXGroup;
+			children = (
+				1F210B0C1F3F406A0037F19C /* ConfirmaConsultaIOS.entitlements */,
+				1F210AD91F3F21190037F19C /* AppDelegate.swift */,
+				1F210ADB1F3F21190037F19C /* ViewController.swift */,
+				1F210ADD1F3F21190037F19C /* Main.storyboard */,
+				1F210AE31F3F21190037F19C /* Assets.xcassets */,
+				1F210AE51F3F21190037F19C /* LaunchScreen.storyboard */,
+				1F210AE81F3F21190037F19C /* Info.plist */,
+				1F210AE01F3F21190037F19C /* ConfirmaConsultaIOS.xcdatamodeld */,
+				1F210B0A1F3F221B0037F19C /* GoogleService-Info.plist */,
+			);
+			path = ConfirmaConsultaIOS;
+			sourceTree = "<group>";
+		};
+		1F210AF01F3F21190037F19C /* ConfirmaConsultaIOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				1F210AF11F3F21190037F19C /* ConfirmaConsultaIOSTests.swift */,
+				1F210AF31F3F21190037F19C /* Info.plist */,
+			);
+			path = ConfirmaConsultaIOSTests;
+			sourceTree = "<group>";
+		};
+		1F210AFB1F3F21190037F19C /* ConfirmaConsultaIOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1F210AFC1F3F21190037F19C /* ConfirmaConsultaIOSUITests.swift */,
+				1F210AFE1F3F21190037F19C /* Info.plist */,
+			);
+			path = ConfirmaConsultaIOSUITests;
+			sourceTree = "<group>";
+		};
+		2D6C9C34CCB85AA846492D67 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B9FE8889206F342A420F342 /* Pods-ConfirmaConsultaIOS.debug.xcconfig */,
+				3B32161B5F4E4F38D6F1E6A9 /* Pods-ConfirmaConsultaIOS.release.xcconfig */,
+				A9CBEF571C63E90A57677D19 /* Pods-ConfirmaConsultaIOSTests.debug.xcconfig */,
+				E5044792649E67AFFEA68418 /* Pods-ConfirmaConsultaIOSTests.release.xcconfig */,
+				1BC07A55F21B10ABE8A6E2B6 /* Pods-ConfirmaConsultaIOSUITests.debug.xcconfig */,
+				23B2A8425537DA515C57FF24 /* Pods-ConfirmaConsultaIOSUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4E078A0B3B218645E5198CBB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				80961D0E91339579E4503055 /* Pods_ConfirmaConsultaIOS.framework */,
+				F46894EFD5CA275C2F03C75A /* Pods_ConfirmaConsultaIOSTests.framework */,
+				4FC5ADD9C0D3A4F3BA36E05F /* Pods_ConfirmaConsultaIOSUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1F210AD51F3F21190037F19C /* ConfirmaConsultaIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F210B011F3F21190037F19C /* Build configuration list for PBXNativeTarget "ConfirmaConsultaIOS" */;
+			buildPhases = (
+				01CFA5B712969DFC9B3D8842 /* [CP] Check Pods Manifest.lock */,
+				1F210AD21F3F21190037F19C /* Sources */,
+				1F210AD31F3F21190037F19C /* Frameworks */,
+				1F210AD41F3F21190037F19C /* Resources */,
+				823B3ED0CC4F460C4547C97C /* [CP] Embed Pods Frameworks */,
+				54F474B48229C6EC3DD9C2AA /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ConfirmaConsultaIOS;
+			productName = ConfirmaConsultaIOS;
+			productReference = 1F210AD61F3F21190037F19C /* ConfirmaConsultaIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1F210AEC1F3F21190037F19C /* ConfirmaConsultaIOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F210B041F3F21190037F19C /* Build configuration list for PBXNativeTarget "ConfirmaConsultaIOSTests" */;
+			buildPhases = (
+				9683943BACFBF9237F830A0D /* [CP] Check Pods Manifest.lock */,
+				1F210AE91F3F21190037F19C /* Sources */,
+				1F210AEA1F3F21190037F19C /* Frameworks */,
+				1F210AEB1F3F21190037F19C /* Resources */,
+				B429F523E7209A958D2A436F /* [CP] Embed Pods Frameworks */,
+				2A0DFEB04E38AE2EB2D2DEF5 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F210AEF1F3F21190037F19C /* PBXTargetDependency */,
+			);
+			name = ConfirmaConsultaIOSTests;
+			productName = ConfirmaConsultaIOSTests;
+			productReference = 1F210AED1F3F21190037F19C /* ConfirmaConsultaIOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1F210AF71F3F21190037F19C /* ConfirmaConsultaIOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F210B071F3F21190037F19C /* Build configuration list for PBXNativeTarget "ConfirmaConsultaIOSUITests" */;
+			buildPhases = (
+				C2CDBB1B936DCB49ACF34548 /* [CP] Check Pods Manifest.lock */,
+				1F210AF41F3F21190037F19C /* Sources */,
+				1F210AF51F3F21190037F19C /* Frameworks */,
+				1F210AF61F3F21190037F19C /* Resources */,
+				0183D5105F6192467558C012 /* [CP] Embed Pods Frameworks */,
+				CC36620ED58ACCDF619F538D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F210AFA1F3F21190037F19C /* PBXTargetDependency */,
+			);
+			name = ConfirmaConsultaIOSUITests;
+			productName = ConfirmaConsultaIOSUITests;
+			productReference = 1F210AF81F3F21190037F19C /* ConfirmaConsultaIOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1F210ACE1F3F21190037F19C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = 2Luglios;
+				TargetAttributes = {
+					1F210AD51F3F21190037F19C = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = P5NJ75969Q;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+					1F210AEC1F3F21190037F19C = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = P5NJ75969Q;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1F210AD51F3F21190037F19C;
+					};
+					1F210AF71F3F21190037F19C = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = P5NJ75969Q;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1F210AD51F3F21190037F19C;
+					};
+				};
+			};
+			buildConfigurationList = 1F210AD11F3F21190037F19C /* Build configuration list for PBXProject "ConfirmaConsultaIOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1F210ACD1F3F21190037F19C;
+			productRefGroup = 1F210AD71F3F21190037F19C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1F210AD51F3F21190037F19C /* ConfirmaConsultaIOS */,
+				1F210AEC1F3F21190037F19C /* ConfirmaConsultaIOSTests */,
+				1F210AF71F3F21190037F19C /* ConfirmaConsultaIOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1F210AD41F3F21190037F19C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F210AE71F3F21190037F19C /* LaunchScreen.storyboard in Resources */,
+				1F210B0B1F3F221B0037F19C /* GoogleService-Info.plist in Resources */,
+				1F210AE41F3F21190037F19C /* Assets.xcassets in Resources */,
+				1F210ADF1F3F21190037F19C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F210AEB1F3F21190037F19C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F210AF61F3F21190037F19C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0183D5105F6192467558C012 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ConfirmaConsultaIOSUITests/Pods-ConfirmaConsultaIOSUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		01CFA5B712969DFC9B3D8842 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2A0DFEB04E38AE2EB2D2DEF5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ConfirmaConsultaIOSTests/Pods-ConfirmaConsultaIOSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		54F474B48229C6EC3DD9C2AA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ConfirmaConsultaIOS/Pods-ConfirmaConsultaIOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		823B3ED0CC4F460C4547C97C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ConfirmaConsultaIOS/Pods-ConfirmaConsultaIOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9683943BACFBF9237F830A0D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B429F523E7209A958D2A436F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ConfirmaConsultaIOSTests/Pods-ConfirmaConsultaIOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2CDBB1B936DCB49ACF34548 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CC36620ED58ACCDF619F538D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ConfirmaConsultaIOSUITests/Pods-ConfirmaConsultaIOSUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1F210AD21F3F21190037F19C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F210ADC1F3F21190037F19C /* ViewController.swift in Sources */,
+				1F210AE21F3F21190037F19C /* ConfirmaConsultaIOS.xcdatamodeld in Sources */,
+				1F210ADA1F3F21190037F19C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F210AE91F3F21190037F19C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F210AF21F3F21190037F19C /* ConfirmaConsultaIOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F210AF41F3F21190037F19C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F210AFD1F3F21190037F19C /* ConfirmaConsultaIOSUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1F210AEF1F3F21190037F19C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F210AD51F3F21190037F19C /* ConfirmaConsultaIOS */;
+			targetProxy = 1F210AEE1F3F21190037F19C /* PBXContainerItemProxy */;
+		};
+		1F210AFA1F3F21190037F19C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F210AD51F3F21190037F19C /* ConfirmaConsultaIOS */;
+			targetProxy = 1F210AF91F3F21190037F19C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1F210ADD1F3F21190037F19C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F210ADE1F3F21190037F19C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1F210AE51F3F21190037F19C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F210AE61F3F21190037F19C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1F210AFF1F3F21190037F19C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1F210B001F3F21190037F19C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1F210B021F3F21190037F19C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B9FE8889206F342A420F342 /* Pods-ConfirmaConsultaIOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ConfirmaConsultaIOS/ConfirmaConsultaIOS.entitlements;
+				DEVELOPMENT_TEAM = P5NJ75969Q;
+				INFOPLIST_FILE = ConfirmaConsultaIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.2luglios.ConfirmaConsultaIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		1F210B031F3F21190037F19C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B32161B5F4E4F38D6F1E6A9 /* Pods-ConfirmaConsultaIOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ConfirmaConsultaIOS/ConfirmaConsultaIOS.entitlements;
+				DEVELOPMENT_TEAM = P5NJ75969Q;
+				INFOPLIST_FILE = ConfirmaConsultaIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.2luglios.ConfirmaConsultaIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		1F210B051F3F21190037F19C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9CBEF571C63E90A57677D19 /* Pods-ConfirmaConsultaIOSTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = P5NJ75969Q;
+				INFOPLIST_FILE = ConfirmaConsultaIOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.2luglios.ConfirmaConsultaIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConfirmaConsultaIOS.app/ConfirmaConsultaIOS";
+			};
+			name = Debug;
+		};
+		1F210B061F3F21190037F19C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5044792649E67AFFEA68418 /* Pods-ConfirmaConsultaIOSTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = P5NJ75969Q;
+				INFOPLIST_FILE = ConfirmaConsultaIOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.2luglios.ConfirmaConsultaIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConfirmaConsultaIOS.app/ConfirmaConsultaIOS";
+			};
+			name = Release;
+		};
+		1F210B081F3F21190037F19C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BC07A55F21B10ABE8A6E2B6 /* Pods-ConfirmaConsultaIOSUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = P5NJ75969Q;
+				INFOPLIST_FILE = ConfirmaConsultaIOSUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.2luglios.ConfirmaConsultaIOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ConfirmaConsultaIOS;
+			};
+			name = Debug;
+		};
+		1F210B091F3F21190037F19C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23B2A8425537DA515C57FF24 /* Pods-ConfirmaConsultaIOSUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = P5NJ75969Q;
+				INFOPLIST_FILE = ConfirmaConsultaIOSUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.2luglios.ConfirmaConsultaIOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ConfirmaConsultaIOS;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1F210AD11F3F21190037F19C /* Build configuration list for PBXProject "ConfirmaConsultaIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F210AFF1F3F21190037F19C /* Debug */,
+				1F210B001F3F21190037F19C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F210B011F3F21190037F19C /* Build configuration list for PBXNativeTarget "ConfirmaConsultaIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F210B021F3F21190037F19C /* Debug */,
+				1F210B031F3F21190037F19C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F210B041F3F21190037F19C /* Build configuration list for PBXNativeTarget "ConfirmaConsultaIOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F210B051F3F21190037F19C /* Debug */,
+				1F210B061F3F21190037F19C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F210B071F3F21190037F19C /* Build configuration list for PBXNativeTarget "ConfirmaConsultaIOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F210B081F3F21190037F19C /* Debug */,
+				1F210B091F3F21190037F19C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1F210AE01F3F21190037F19C /* ConfirmaConsultaIOS.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1F210AE11F3F21190037F19C /* ConfirmaConsultaIOS.xcdatamodel */,
+			);
+			currentVersion = 1F210AE11F3F21190037F19C /* ConfirmaConsultaIOS.xcdatamodel */;
+			path = ConfirmaConsultaIOS.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 1F210ACE1F3F21190037F19C /* Project object */;
+}

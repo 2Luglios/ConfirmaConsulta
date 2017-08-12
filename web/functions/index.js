@@ -36,6 +36,7 @@ exports.sendMSG = functions.https.onRequest((req, res) => {
       var mensagensRef = ref.ref('mensagens');
       mensagensRef.push({ 
         origem: origem,
+        data: new Date().format('d/m/Y h:i:s'),
         destino: destino,
         mensagem: mensagem 
       }, function(error) {

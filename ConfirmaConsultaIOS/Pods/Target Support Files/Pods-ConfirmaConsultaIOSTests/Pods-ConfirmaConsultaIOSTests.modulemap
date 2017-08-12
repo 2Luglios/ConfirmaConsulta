@@ -1,0 +1,6 @@
+framework module Pods_ConfirmaConsultaIOSTests {
+  umbrella header "Pods-ConfirmaConsultaIOSTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
