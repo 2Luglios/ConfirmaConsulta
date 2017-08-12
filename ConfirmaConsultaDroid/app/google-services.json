@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "42148264085",
+    "firebase_url": "https://confirmaconsulta-63f26.firebaseio.com",
+    "project_id": "confirmaconsulta-63f26",
+    "storage_bucket": "confirmaconsulta-63f26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42148264085:android:71f8a31f852e3f4d",
+        "android_client_info": {
+          "package_name": "br.com.a2luglios.confirmaconsultadroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42148264085-529ekgi41853b5ngontpc0jbvfs3ob23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYeTyBgmfX-N6B_A83tcowLP1LOFv_aZ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
