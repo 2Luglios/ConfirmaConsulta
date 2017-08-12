@@ -2,6 +2,9 @@ PODS:
   - Firebase/Core (4.0.4):
     - FirebaseAnalytics (= 4.0.2)
     - FirebaseCore (= 4.0.4)
+  - Firebase/Database (4.0.4):
+    - Firebase/Core
+    - FirebaseDatabase (= 4.0.0)
   - Firebase/Messaging (4.0.4):
     - Firebase/Core
     - FirebaseMessaging (= 2.0.0)
@@ -12,6 +15,8 @@ PODS:
   - FirebaseCore (4.0.4):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
+  - FirebaseDatabase (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
   - FirebaseInstanceID (2.0.0):
     - FirebaseCore (~> 4.0)
   - FirebaseMessaging (2.0.0):
@@ -35,6 +40,7 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Core
+  - Firebase/Database
   - Firebase/Messaging
   - JTAppleCalendar (~> 7.0)
 
@@ -42,6 +48,7 @@ SPEC CHECKSUMS:
   Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
   FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
   FirebaseCore: cfc042628ef9f20debe09c0eb683135fcd404cb4
+  FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
@@ -49,6 +56,6 @@ SPEC CHECKSUMS:
   nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
 
-PODFILE CHECKSUM: f77e04da61f8bbcacad1b935030bbbdd5b3d5a5b
+PODFILE CHECKSUM: 1a948010ac3ead434ff170a27b57468522d63e75
 
 COCOAPODS: 1.2.1
