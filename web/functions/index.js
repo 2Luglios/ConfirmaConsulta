@@ -6,6 +6,7 @@
 const functions = require('firebase-functions');
 var firebase = require('firebase');
 var request = require('request');
+var dateFormat = require('dateformat');
 
 var serviceAccount = require("./confirmaconsulta-63f26-firebase-adminsdk-29x0s-5f23cec972.json");
 var API_KEY = "AAAACdA7eJU:APA91bEkS6yWa8DIQwD9yIlNAi502yLAI2dPZrJwtK0WVf_XKAb2sWMVwZn5c6FP5mHW5bxLd5J1D9EJw4HhOSsZqJw-AnmD7jeaXV3DR06aWrcHYwq1kKsu_STLZoHjTGOKMaUp5hR3";
@@ -32,11 +33,14 @@ exports.sendMSG = functions.https.onRequest((req, res) => {
     const mensagem = req.query.mensagem;
     const origem = req.query.origem;
 
-    sendMessageToTopic(origem, mensagem, function() {
+    sendMessageToDevice(origem, destino, mensagem, function() {
+      var now = new Date();
+      var formatDate = dateFormat(now, "dd/mm/yyyy HH:MM:ss");
+
       var mensagensRef = ref.ref('mensagens');
       mensagensRef.push({ 
         origem: origem,
-        data: new Date().format('d/m/Y h:i:s'),
+        data: formatDate,
         destino: destino,
         mensagem: mensagem 
       }, function(error) {
@@ -79,7 +83,7 @@ function sendMessageToTopic(username, message, onSuccess) {
   });
 }
 
-function sendMessageToDevice(origem, destino, mensagem) {
+function sendMessageToDevice(origem, destino, mensagem, onSuccess) {
     request({
         url: 'https://fcm.googleapis.com/fcm/send',
         method: 'POST',
@@ -89,7 +93,10 @@ function sendMessageToDevice(origem, destino, mensagem) {
         },
         body: JSON.stringify({
             notification: { 
-                body: mensagem,
+                body: {
+                  mensagem: mensagem,
+                  from: origem
+                },
                 title: 'confirmacao',
                 priority: 10
             },
