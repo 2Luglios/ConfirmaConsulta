@@ -57,14 +57,10 @@ public class ConsultaDao {
 
             consulta.setId(cursor.getLong(cursor.getColumnIndex("id")));
 
-            Medico medico = new Medico();
-            medico.setId(cursor.getLong(cursor.getColumnIndex("medico")));
-            medico = new MedicoDao(bancoUtil).getMedicoPorId(medico);
-            consulta.setMedico(medico);
+            consulta.setMedico(cursor.getString(cursor.getColumnIndex("medico")));
 
-            Calendar data = Calendar.getInstance();
-            data.setTimeInMillis(cursor.getLong(cursor.getColumnIndex("data")));
-            consulta.setData(data);
+            consulta.setData(cursor.getLong(cursor.getColumnIndex("data")));
+
 
             Consultorio consultorio = new Consultorio();
             consultorio.setId(cursor.getLong(cursor.getColumnIndex("consultorio")));

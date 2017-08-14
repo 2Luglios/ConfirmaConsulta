@@ -4,13 +4,16 @@ import android.content.ContentValues;
 
 import java.util.List;
 
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
+
 /**
  * Created by ettoreluglio on 19/06/17.
  */
 
-public class Medico {
+public class Medico implements FirebaseRTDBModel{
 
     private Long id;
+    private String hash;
     private String nome;
     private String especialidade;
     private String oQueAtende;
@@ -23,6 +26,14 @@ public class Medico {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
     public String getNome() {

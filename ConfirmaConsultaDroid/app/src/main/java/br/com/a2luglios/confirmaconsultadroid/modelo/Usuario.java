@@ -1,17 +1,20 @@
 package br.com.a2luglios.confirmaconsultadroid.modelo;
 
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
+
 /**
  * Created by ettoreluglio on 19/06/17.
  */
 
-public class Usuario {
+public class Usuario implements FirebaseRTDBModel{
 
     private Long id;
+    private String hash;
     private String nome;
     private String email;
     private String senha;
     private String lembrete;
-    private String googleId;
+    private String token;
 
     public Long getId() {
         return id;
@@ -19,6 +22,16 @@ public class Usuario {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String getHash() {
+        return hash;
+    }
+
+    @Override
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
     public String getNome() {
@@ -53,11 +66,11 @@ public class Usuario {
         this.lembrete = lembrete;
     }
 
-    public String getGoogleId() {
-        return googleId;
+    public String getToken() {
+        return token;
     }
 
-    public void setGoogleId(String googleId) {
-        this.googleId = googleId;
+    public void setToken(String token) {
+        this.token = token;
     }
 }

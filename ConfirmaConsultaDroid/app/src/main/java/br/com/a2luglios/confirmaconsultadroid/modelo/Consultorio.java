@@ -4,13 +4,16 @@ import android.content.ContentValues;
 
 import java.util.List;
 
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
+
 /**
  * Created by ettoreluglio on 20/06/17.
  */
 
-public class Consultorio {
+public class Consultorio implements FirebaseRTDBModel {
 
     private Long id;
+    private String hash;
     private String nome;
     private String endereco;
     private String cep;
@@ -25,6 +28,16 @@ public class Consultorio {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String getHash() {
+        return hash;
+    }
+
+    @Override
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
     public String getNome() {

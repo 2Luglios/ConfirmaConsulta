@@ -48,7 +48,7 @@ public class ConsultaAdapter extends BaseAdapter {
         View v = LayoutInflater.from(ctx).inflate(R.layout.item_consulta_layout, null);
 
         TextView medico = (TextView) v.findViewById(R.id.medico);
-        medico.setText(consultas.get(i).getMedico().getNome());
+        medico.setText(consultas.get(i).getMedico());
 
         return v;
     }

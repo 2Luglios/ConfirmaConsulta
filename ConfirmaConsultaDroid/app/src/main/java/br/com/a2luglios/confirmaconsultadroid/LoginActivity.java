@@ -23,4 +23,12 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Testar se o sujeito já não está conectado
+    }
 }

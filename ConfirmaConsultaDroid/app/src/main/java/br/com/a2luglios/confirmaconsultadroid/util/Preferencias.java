@@ -28,7 +28,7 @@ public class Preferencias {
         edit.putString("nome", usuario.getNome());
         edit.putString("senha", usuario.getSenha());
         edit.putString("lembrete", usuario.getLembrete());
-        edit.putString("googleId", usuario.getGoogleId());
+        edit.putString("token", usuario.getToken());
         edit.commit();
     }
 
@@ -40,7 +40,7 @@ public class Preferencias {
         usuario.setNome(prefs.getString("nome", ""));
         usuario.setSenha(prefs.getString("senha", ""));
         usuario.setLembrete(prefs.getString("lembrete", ""));
-        usuario.setGoogleId(prefs.getString("googleId", ""));
+        usuario.setToken(prefs.getString("token", ""));
 
         return usuario;
     }

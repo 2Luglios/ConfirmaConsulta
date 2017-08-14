@@ -1,32 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="br.com.a2luglios.confirmaconsultadroid.PrincipalActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/listaConsultas"
+    <LinearLayout
+        android:id="@+id/botoes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <ImageButton
+            android:id="@+id/home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:src="@android:drawable/ic_dialog_dialer"
+            android:text="Principal" />
+
+        <ImageButton
+            android:id="@+id/meus_dados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:src="@android:drawable/ic_dialog_dialer"
+            android:text="Usuários" />
+
+        <ImageButton
+            android:id="@+id/agenda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:src="@android:drawable/ic_dialog_dialer"
+            android:text="Agenda" />
+
+        <ImageButton
+            android:id="@+id/profissionais"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:src="@android:drawable/ic_dialog_dialer"
+            android:text="Profissionais" />
+
+        <ImageButton
+            android:id="@+id/notificacoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:src="@android:drawable/ic_dialog_dialer"
+            android:text="Notificação" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_place"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/botoes">
 
-    <Button
-        android:id="@+id/addConsulta"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/fundo"
-        android:elevation="6dp"
-        android:paddingBottom="6dp"
-        android:text="+"
-        android:textColor="#FFFFFF"
-        android:textSize="40sp" />
+    </FrameLayout>
+
 </RelativeLayout>

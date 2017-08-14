@@ -1,16 +1,45 @@
+
+
+MARCAR quais planos de saúde atende
+
+O procedimento no instante de marcar a consulta
+
+Possibilidade de adiantar as consultas
+
+
+
+
+
+
+
+Usuario baixa o app e se cadastra
+
+Cadastro Usuario
+	nome
+	nascimento
+	CEP e complemento
+	token
+
+Usuario consulta um medico e um consultorio e liga para marcar a consulta,
+nesse instante, ele já envia os dados para o consultorio e depois
+já recebe o agendamento no dispositivo juntamente com o medico, o consultorio
 especialidades e consultorios por geoposicionamento e proximidade
 
-Telas.
 
-1- Splash
-2- Login
-3- Autenticados
-4- Lista Consultas
-5- Adicionar consulta com filtro de medicos, especialidades, consultorios ordenados por localizacao
-6- Lista de Remedios
-7- Adicionar remedios com lembretes
-***** Tudo com abas inferiores******
-8- Compra de remedios baratos e combo
-9- gps para o consultorio
-10- lembrete de consulta e remedios
-11- Notificacoes de confirmacao de consulta
+As confirmacoes de consulta mudam as cores nas tabelas
+
+	Agendado
+	Confirmado
+	Cancelado
+
+WEB
+	Cadastrar Consultorio para cobrar mensalidade
+	O Consultorio cadastra qantos medicos quiser
+	O consultorio confirma as consultas enviando pushs para os respectivos clientes
+	Os medicos tem especialidade e agenda
+		As agendas tem exclusoes de dias, e horarios
+		As agendas tem consultas
+		O que sobra é espaço livre
+		Pensar em import/export de ics
+
+No dia, com a antecedencia marcada, o dispositivo desperta e oferece um mapa para chegar no local

@@ -1,13 +1,12 @@
 package br.com.a2luglios.confirmaconsultadroid;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ListViewCompat;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -23,47 +22,79 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal_layout);
 
-        final ListView listaConsultas = (ListView) findViewById(R.id.listaConsultas);
+        PrincipalActivity.this.setTitle("Home");
 
-        listaConsultas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        FragmentTransaction transaction =
+                getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_place, new FragmentHome());
+        transaction.commit();
 
-            }
-        });
-
-        listaConsultas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                registerForContextMenu(listaConsultas);
-                return false;
-            }
-        });
-
-        Button addConsulta = (Button) findViewById(R.id.addConsulta);
-        addConsulta.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnHome = (ImageButton) findViewById(R.id.home);
+        btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(PrincipalActivity.this, "Novo", Toast.LENGTH_LONG).show();
+                PrincipalActivity.this.setTitle("Home");
+
+                FragmentTransaction transaction =
+                        getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_place, new FragmentHome());
+                transaction.commit();
             }
         });
+
+        ImageButton btnMeusDados = (ImageButton) findViewById(R.id.meus_dados);
+        btnMeusDados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrincipalActivity.this.setTitle("Meus Dados");
+
+                FragmentTransaction transaction =
+                        getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_place, new FragmentMeusDados());
+                transaction.commit();
+            }
+        });
+
+        ImageButton btnAgenda = (ImageButton) findViewById(R.id.agenda);
+        btnAgenda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrincipalActivity.this.setTitle("Agenda");
+
+                FragmentTransaction transaction =
+                        getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_place, new FragmentAgenda());
+                transaction.commit();
+            }
+        });
+
+        ImageButton btnProfissionais = (ImageButton) findViewById(R.id.profissionais);
+        btnProfissionais.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrincipalActivity.this.setTitle("Profissionais");
+
+                FragmentTransaction transaction =
+                        getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_place, new FragmentProfissionais());
+                transaction.commit();
+            }
+        });
+
+        ImageButton btnNotificacoes = (ImageButton) findViewById(R.id.notificacoes);
+        btnNotificacoes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrincipalActivity.this.setTitle("Notificações");
+
+                FragmentTransaction transaction =
+                        getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_place, new FragmentNotificacoes());
+                transaction.commit();
+            }
+        });
+
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-        carregaLista();
-    }
-
-    private void carregaLista() {
-        BancoUtil bancoUtil = new BancoUtil(this);
-        ConsultaDao dao = new ConsultaDao(bancoUtil);
-        List<Consulta> consultas = dao.list();
-        bancoUtil.close();
-
-        ListView listaConsultas = (ListView) findViewById(R.id.listaConsultas);
-        ConsultaAdapter adapter = new ConsultaAdapter(this, consultas);
-        listaConsultas.setAdapter(adapter);
-    }
 }

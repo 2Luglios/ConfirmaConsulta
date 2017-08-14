@@ -1,12 +1,15 @@
-package br.com.a2luglios.confirmaconsultadroid;
+package br.com.a2luglios.confirmaconsultadroid.modelo;
+
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
 
 /**
  * Created by ettoreluglio on 12/08/17.
  */
 
-public class Mensagem {
+public class Mensagem implements FirebaseRTDBModel {
 
     private Long id;
+    private String hash;
     private String origem;
     private String destino;
     private String data;
@@ -18,6 +21,14 @@ public class Mensagem {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
     public String getOrigem() {
