@@ -20,7 +20,6 @@ public class Consultorio implements FirebaseRTDBModel {
     private String bairro;
     private String cidade;
     private String estado;
-    private List<Medico> medicos;
 
     public Long getId() {
         return id;
@@ -88,14 +87,6 @@ public class Consultorio implements FirebaseRTDBModel {
         this.estado = estado;
     }
 
-    public List<Medico> getMedicos() {
-        return medicos;
-    }
-
-    public void setMedicos(List<Medico> medicos) {
-        this.medicos = medicos;
-    }
-
     public ContentValues getContentValues() {
         ContentValues values = new ContentValues();
         values.put("id", id);
@@ -106,14 +97,6 @@ public class Consultorio implements FirebaseRTDBModel {
         values.put("cidade", cidade);
         values.put("estado", estado);
 
-        String listaMedicos = "{";
-        for (int i = 0 ; i < medicos.size() ; i++ ){
-            listaMedicos += medicos.get(i).getId();
-            if ( i < medicos.size() ) listaMedicos += ",";
-        }
-        listaMedicos += "}";
-
-        values.put("medicos", listaMedicos);
         return values;
     }
 }

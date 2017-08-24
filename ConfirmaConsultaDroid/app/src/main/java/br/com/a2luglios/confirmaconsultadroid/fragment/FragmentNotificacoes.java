@@ -1,4 +1,4 @@
-package br.com.a2luglios.confirmaconsultadroid;
+package br.com.a2luglios.confirmaconsultadroid.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,18 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import br.com.a2luglios.confirmaconsultadroid.R;
+
 /**
  * Created by ettoreluglio on 14/08/17.
  */
 
-public class FragmentHome extends Fragment {
+public class FragmentNotificacoes extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View agenda =
-                inflater.inflate(R.layout.fragment_home,
+                inflater.inflate(R.layout.fragment_notificacoes,
                         container, false);
 
         return agenda;

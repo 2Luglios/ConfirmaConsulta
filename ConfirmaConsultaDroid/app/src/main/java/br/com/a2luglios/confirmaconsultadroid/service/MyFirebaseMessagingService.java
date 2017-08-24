@@ -3,6 +3,7 @@ package br.com.a2luglios.confirmaconsultadroid.service;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -13,6 +14,18 @@ import com.google.firebase.messaging.RemoteMessage;
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private Context ctx;
+
+    @Override
+    public void handleIntent(Intent intent) {
+        super.handleIntent(intent);
+
+        Bundle bundle = intent.getExtras();
+
+        String title = bundle.getString("gcm.notification.title");
+        String body = bundle.getString("gcm.notification.body");
+
+        Log.d("Mensagem", title + " : " + body);
+    }
 
     @Override
     public void onMessageReceived(final RemoteMessage remoteMessage) {

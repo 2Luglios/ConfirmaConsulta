@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.com.a2luglios.confirmaconsultadroid.modelo.Medico;
+
 import br.com.a2luglios.confirmaconsultadroid.modelo.Remedio;
 import br.com.a2luglios.confirmaconsultadroid.util.BancoUtil;
 
@@ -60,10 +60,6 @@ public class RemedioDao {
             inicio.setTimeInMillis(cursor.getLong(cursor.getColumnIndex("inicio")));
             remedio.setInicio(inicio);
 
-            Medico medico = new Medico();
-            medico.setId(cursor.getLong(cursor.getColumnIndex("medico")));
-            medico = new MedicoDao(bancoUtil).getMedicoPorId(medico);
-            remedio.setMedico(medico);
 
             remedios.add(remedio);
         }

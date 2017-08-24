@@ -18,7 +18,9 @@ public class Consulta implements FirebaseRTDBModel{
     private long data;
     private Confirmacao confirmacao;
     private String consultorio;
-    private int horasAntesAviso;
+    private int alarme;
+    private String procedimento;
+    private String chavemedicoconsultorio;
 
     public Long getId() {
         return id;
@@ -28,10 +30,12 @@ public class Consulta implements FirebaseRTDBModel{
         this.id = id;
     }
 
+    @Override
     public String getHash() {
         return hash;
     }
 
+    @Override
     public void setHash(String hash) {
         this.hash = hash;
     }
@@ -60,12 +64,36 @@ public class Consulta implements FirebaseRTDBModel{
         this.confirmacao = confirmacao;
     }
 
-    public int getHorasAntesAviso() {
-        return horasAntesAviso;
+    public String getConsultorio() {
+        return consultorio;
     }
 
-    public void setHorasAntesAviso(int horasAntesAviso) {
-        this.horasAntesAviso = horasAntesAviso;
+    public void setConsultorio(String consultorio) {
+        this.consultorio = consultorio;
+    }
+
+    public int getAlarme() {
+        return alarme;
+    }
+
+    public void setAlarme(int alarme) {
+        this.alarme = alarme;
+    }
+
+    public String getProcedimento() {
+        return procedimento;
+    }
+
+    public void setProcedimento(String procedimento) {
+        this.procedimento = procedimento;
+    }
+
+    public String getChavemedicoconsultorio() {
+        return chavemedicoconsultorio;
+    }
+
+    public void setChavemedicoconsultorio(String chavemedicoconsultorio) {
+        this.chavemedicoconsultorio = chavemedicoconsultorio;
     }
 
     public ContentValues getContentValues() {
@@ -74,16 +102,9 @@ public class Consulta implements FirebaseRTDBModel{
         values.put("medico", medico);
         values.put("data", data);
         values.put("confirmacao", confirmacao.name());
-        values.put("horasAntesAviso", horasAntesAviso);
+        values.put("alarme", alarme);
         values.put("consultorio", consultorio);
         return values;
     }
 
-    public String getConsultorio() {
-        return consultorio;
-    }
-
-    public void setConsultorio(String consultorio) {
-        this.consultorio = consultorio;
-    }
 }

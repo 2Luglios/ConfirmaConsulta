@@ -5,10 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
@@ -22,6 +23,8 @@ public class ConsultaAdapter extends BaseAdapter {
 
     private Context ctx;
     private List<Consulta> consultas;
+    private SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat sdfHora = new SimpleDateFormat("hh:mm");
 
     public ConsultaAdapter(Context ctx, List<Consulta> consultas) {
         this.ctx = ctx;
@@ -40,15 +43,25 @@ public class ConsultaAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return consultas.get(i).getId();
+        return i;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View v = LayoutInflater.from(ctx).inflate(R.layout.item_consulta_layout, null);
 
-        TextView medico = (TextView) v.findViewById(R.id.medico);
-        medico.setText(consultas.get(i).getMedico());
+        Date data = new Date();
+        data.setTime(consultas.get(i).getData());
+
+        TextView txtData = (TextView) v.findViewById(R.id.txtData);
+        txtData.setText(sdfData.format(data));
+        TextView txtHora = (TextView) v.findViewById(R.id.txtHora);
+        txtHora.setText(sdfHora.format(data));
+        TextView txtMedico = (TextView) v.findViewById(R.id.txtMedico);
+        txtMedico.setText(consultas.get(i).getMedico());
+        TextView txtClinica = (TextView) v.findViewById(R.id.txtClinica);
+        txtClinica.setText(consultas.get(i).getConsultorio());
+        ImageView imgConfirmacao = (ImageView) v.findViewById(R.id.imgConfirmacao);
 
         return v;
     }

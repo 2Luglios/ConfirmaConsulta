@@ -7,22 +7,22 @@
     tools:context="br.com.a2luglios.confirmaconsultadroid.LoginActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login:"
-        tools:layout_editor_absoluteX="174dp"
-        tools:layout_editor_absoluteY="100dp"
+        android:layout_below="@+id/imgLogo"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="21dp"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+        android:text="Email:"
+        tools:layout_editor_absoluteX="174dp"
+        tools:layout_editor_absoluteY="100dp" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/campoEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/campoEmail"
+        android:layout_below="@+id/txtEmail"
         android:ems="10"
         android:hint="seuemail@seuprovedor"
         android:inputType="textEmailAddress"
@@ -31,21 +31,21 @@
         tools:layout_editor_absoluteY="117dp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password:"
         tools:layout_editor_absoluteX="160dp"
         tools:layout_editor_absoluteY="160dp"
         android:layout_marginTop="21dp"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/campoEmail"
         android:layout_centerHorizontal="true" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/campoSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/txtSenha"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="********"
@@ -54,19 +54,8 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="185dp" />
 
-    <Button
-        android:id="@+id/btnEntrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Entrar"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="231dp"
-        android:layout_marginTop="18dp"
-        android:layout_below="@+id/editText2"
-        android:layout_centerHorizontal="true" />
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgLogo"
         android:layout_width="48dp"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher"
@@ -75,4 +64,33 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/campoSenha"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnEntrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/campoSenha"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:text="Entrar"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="231dp" />
+
+        <Button
+            android:id="@+id/btnCadastrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:text="Cadastrar" />
+
+    </LinearLayout>
 </RelativeLayout>
