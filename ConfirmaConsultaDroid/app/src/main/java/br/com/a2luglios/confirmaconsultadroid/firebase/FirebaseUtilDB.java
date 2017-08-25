@@ -64,4 +64,25 @@ public class FirebaseUtilDB {
             }
         });
     }
+
+    public void readRTDBPlain(String raiz, final FirebaseRTDBUpdate updateMensagens) {
+        final DatabaseReference myRef = database.getReference(raiz);
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                Iterator<DataSnapshot> i = children.iterator();
+                while(i.hasNext()) {
+                    DataSnapshot next = i.next();
+                    updateMensagens.updateMensagem(next.getValue());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.d("FirebaseDatabase", "Erro ao ler ", error.toException());
+            }
+        });
+    }
 }

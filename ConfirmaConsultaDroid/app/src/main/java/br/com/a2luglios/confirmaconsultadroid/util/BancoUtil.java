@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import br.com.a2luglios.confirmaconsultadroid.dao.MedicoDao;
-import br.com.a2luglios.confirmaconsultadroid.dao.RemedioDao;
 
 /**
  * Created by ettoreluglio on 19/06/17.
@@ -25,7 +24,6 @@ public class BancoUtil extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(MedicoDao.CREATE_QUERY);
 
-        sqLiteDatabase.execSQL(RemedioDao.CREATE_QUERY);
     }
 
     @Override
@@ -33,6 +31,5 @@ public class BancoUtil extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(MedicoDao.UPDATE_QUERY);
 
-        sqLiteDatabase.execSQL(RemedioDao.UPDATE_QUERY);
     }
 }

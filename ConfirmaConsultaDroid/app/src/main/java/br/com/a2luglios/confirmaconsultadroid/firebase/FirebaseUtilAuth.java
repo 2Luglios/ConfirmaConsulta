@@ -28,7 +28,7 @@ public class FirebaseUtilAuth {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    public void criarUsuario(String email, String senha, String nome, final FirebaseLoginInterface loginInterface) {
+    public void criarUsuario(String email, String senha, final FirebaseLoginInterface loginInterface) {
         mAuth.createUserWithEmailAndPassword(email, senha)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -58,6 +58,7 @@ public class FirebaseUtilAuth {
 
     public void logout() {
         mAuth.signOut();
+        Log.d("Auth", "LOGOUT");
     }
 
     public boolean isConnected() {

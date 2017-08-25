@@ -3,23 +3,23 @@ package br.com.a2luglios.confirmaconsultadroid.modelo;
 import android.content.ContentValues;
 
 import java.util.List;
+import java.util.Map;
 
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBToken;
 
 /**
  * Created by ettoreluglio on 20/06/17.
  */
 
-public class Consultorio implements FirebaseRTDBModel {
+public class Consultorio implements FirebaseRTDBModel, FirebaseRTDBToken {
 
     private Long id;
     private String hash;
+    private String token;
     private String nome;
-    private String endereco;
-    private String cep;
-    private String bairro;
-    private String cidade;
-    private String estado;
+    private Map<String, Object> contato;
+    private Map<String, Object> endereco;
 
     public Long getId() {
         return id;
@@ -39,6 +39,16 @@ public class Consultorio implements FirebaseRTDBModel {
         this.hash = hash;
     }
 
+    @Override
+    public String getToken() {
+        return token;
+    }
+
+    @Override
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -47,56 +57,19 @@ public class Consultorio implements FirebaseRTDBModel {
         this.nome = nome;
     }
 
-    public String getEndereco() {
+    public Map<String, Object> getContato() {
+        return contato;
+    }
+
+    public void setContato(Map<String, Object> contato) {
+        this.contato = contato;
+    }
+
+    public Map<String, Object> getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Map<String, Object> endereco) {
         this.endereco = endereco;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public ContentValues getContentValues() {
-        ContentValues values = new ContentValues();
-        values.put("id", id);
-        values.put("nome", nome);
-        values.put("endereco", endereco);
-        values.put("cep", cep);
-        values.put("bairro", bairro);
-        values.put("cidade", cidade);
-        values.put("estado", estado);
-
-        return values;
     }
 }

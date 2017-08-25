@@ -38,7 +38,7 @@ public class MedicoAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return medicos.get(i).getId();
+        return i;
     }
 
     @Override

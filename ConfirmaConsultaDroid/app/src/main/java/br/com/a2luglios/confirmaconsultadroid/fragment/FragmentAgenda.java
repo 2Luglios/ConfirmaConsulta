@@ -3,7 +3,8 @@ package br.com.a2luglios.confirmaconsultadroid.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -12,12 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
@@ -26,7 +26,6 @@ import br.com.a2luglios.confirmaconsultadroid.adapter.ConsultaAdapter;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Consulta;
-import br.com.a2luglios.confirmaconsultadroid.util.BancoUtil;
 
 /**
  * Created by ettoreluglio on 14/08/17.
@@ -64,6 +63,21 @@ public class FragmentAgenda extends Fragment {
             }
         });
 
+        Button btnAddConsulta = (Button) agenda.findViewById(R.id.btnAddConsulta);
+        btnAddConsulta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getFragmentManager();
+
+                FragmentBusca busca = new FragmentBusca();
+
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_place, busca);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
         return agenda;
     }
 
@@ -87,14 +101,16 @@ public class FragmentAgenda extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        consultas = new ArrayList<>();
     }
 
     private void carregaLista(final ListView listConsultas) {
+        Log.d("Agenda", "Inicio da busca...");
         new FirebaseUtilDB().readRTDB("consultas", Consulta.class, new FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
                 Consulta consulta = (Consulta) obj;
-                if ( consultas == null ) consultas = new ArrayList<>();
+                Log.d("Agenda", "Achei um...");
                 consultas.add(consulta);
                 listConsultas.setAdapter(new ConsultaAdapter(getContext(), consultas));
             }

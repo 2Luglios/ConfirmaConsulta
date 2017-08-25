@@ -4,8 +4,10 @@
 
     <item
         android:id="@+id/menu_meus_dados_options_salvar"
-        android:title="Salvar" />
+        android:title="Salvar"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_meus_dados_options_logout"
-        android:title="Logout" />
+        android:title="Sair"
+        app:showAsAction="ifRoom" />
 </menu>

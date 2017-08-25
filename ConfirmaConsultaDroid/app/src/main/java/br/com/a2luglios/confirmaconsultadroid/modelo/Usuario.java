@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBToken;
 
 /**
  * Created by ettoreluglio on 19/06/17.
  */
 
-public class Usuario implements FirebaseRTDBModel {
+public class Usuario implements FirebaseRTDBModel, FirebaseRTDBToken {
 
     private Long id;
     private String hash;
