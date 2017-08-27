@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
 
@@ -23,53 +25,23 @@ public class FragmentNotificacoes extends Fragment {
                 inflater.inflate(R.layout.fragment_notificacoes,
                         container, false);
 
+        ListView listNotificacoes = (ListView) agenda.findViewById(R.id.listNotificacoes);
+
+        listNotificacoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
+
+        listNotificacoes.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                return false;
+            }
+        });
+
+
         return agenda;
     }
 }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-////        carregaLista();
-//    }
-
-//    private void carregaLista() {
-//        BancoUtil bancoUtil = new BancoUtil(this);
-//        ConsultaDao dao = new ConsultaDao(bancoUtil);
-//        List<Consulta> consultas = dao.list();
-//        bancoUtil.close();
-//
-//        ListView listaConsultas = (ListView) findViewById(R.id.listaConsultas);
-//        ConsultaAdapter adapter = new ConsultaAdapter(this, consultas);
-//        listaConsultas.setAdapter(adapter);
-//    }
-
-
-//
-//        setContentView(R.layout.activity_backup_layout);
-//
-//        final ListView listaConsultas = (ListView) findViewById(R.id.listaConsultas);
-//
-//        listaConsultas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//            }
-//        });
-//
-//        listaConsultas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                registerForContextMenu(listaConsultas);
-//                return false;
-//            }
-//        });
-//
-//        Button addConsulta = (Button) findViewById(R.id.addConsulta);
-//        addConsulta.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(PrincipalActivity.this, "Novo", Toast.LENGTH_LONG).show();
-//            }
-//        });

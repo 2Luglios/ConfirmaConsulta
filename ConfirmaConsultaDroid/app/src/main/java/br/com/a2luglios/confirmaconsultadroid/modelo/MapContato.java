@@ -11,7 +11,8 @@ public class MapContato implements MapaFirebase {
 
     private String email;
     private String celular;
-    private String telefone;
+    private String telefoneResidencial;
+    private String telefoneComercial;
     private String contatoEmergencia;
     private String telefoneEmergencia;
 
@@ -31,12 +32,20 @@ public class MapContato implements MapaFirebase {
         this.celular = celular;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getTelefoneResidencial() {
+        return telefoneResidencial;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefoneResidencial(String telefoneResidencial) {
+        this.telefoneResidencial = telefoneResidencial;
+    }
+
+    public String getTelefoneComercial() {
+        return telefoneComercial;
+    }
+
+    public void setTelefoneComercial(String telefoneComercial) {
+        this.telefoneComercial = telefoneComercial;
     }
 
     public String getContatoEmergencia() {
@@ -60,7 +69,8 @@ public class MapContato implements MapaFirebase {
         Map<String, Object> mapa = new HashMap<>();
         mapa.put("email", email);
         mapa.put("celular", celular);
-        mapa.put("telefone", telefone);
+        mapa.put("telefoneComercial", telefoneComercial);
+        mapa.put("telefoneResidencial", telefoneResidencial);
         mapa.put("contatoEmergencia", contatoEmergencia);
         mapa.put("telefoneEmergencia", telefoneEmergencia);
         return mapa;
@@ -70,7 +80,8 @@ public class MapContato implements MapaFirebase {
     public void setMapa(Map<String, Object> mapa) {
         email = (String) mapa.get("email");
         celular = (String) mapa.get("celular");
-        telefone = (String) mapa.get("telefone");
+        telefoneComercial = (String) mapa.get("telefoneComercial");
+        telefoneResidencial = (String) mapa.get("telefoneResidencial");
         contatoEmergencia = (String) mapa.get("contatoEmergencia");
         telefoneEmergencia = (String) mapa.get("telefoneEmergencia");
     }

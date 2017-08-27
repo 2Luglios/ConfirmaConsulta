@@ -4,20 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import br.com.a2luglios.confirmaconsultadroid.PrincipalActivity;
 import br.com.a2luglios.confirmaconsultadroid.R;
@@ -42,6 +46,9 @@ public class FragmentMeusDados extends Fragment {
     private EditText campoRG;
     private CheckBox checkSouMedico;
     private EditText campoCRM;
+    private ListView listaEspecialidades;
+    private ListView listaPlanos;
+    private ListView listaConsultorios;
 
     @Nullable
     @Override
@@ -58,6 +65,18 @@ public class FragmentMeusDados extends Fragment {
         campoRG = (EditText) meusDados.findViewById(R.id.campoRG);
         checkSouMedico = (CheckBox) meusDados.findViewById(R.id.checkSouMedico);
         campoCRM = (EditText) meusDados.findViewById(R.id.campoCRM);
+
+        listaEspecialidades = (ListView) meusDados.findViewById(R.id.listaEspecialidades);
+        listaEspecialidades.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listaEspecialidades.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_multiple_choice, Arrays.asList("la", "lala", "lalala")));
+
+        listaPlanos = (ListView) meusDados.findViewById(R.id.listaPlanos);
+        listaPlanos.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listaPlanos.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_multiple_choice, Arrays.asList("la", "lala", "lalala")));
+
+        listaConsultorios = (ListView) meusDados.findViewById(R.id.listaConsultorios);
+        listaConsultorios.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listaConsultorios.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_multiple_choice, Arrays.asList("la", "lala", "lalala")));
 
         Usuario usuario = new Preferencias(getContext()).getUsuario();
         if ( usuario.getToken().equals("") ) {
@@ -153,5 +172,35 @@ public class FragmentMeusDados extends Fragment {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void pegaClicado(View v) {
+//        SparseBooleanArray checked = listView.getCheckedItemPositions();
+//        ArrayList<String> selectedItems = new ArrayList<String>();
+//        for (int i = 0; i < checked.size(); i++) {
+//            // Item position in adapter
+//            int position = checked.keyAt(i);
+//            // Add sport if it is checked i.e.) == TRUE!
+//            if (checked.valueAt(i))
+//                selectedItems.add(adapter.getItem(position));
+//        }
+//
+//        String[] outputStrArr = new String[selectedItems.size()];
+//
+//        for (int i = 0; i < selectedItems.size(); i++) {
+//            outputStrArr[i] = selectedItems.get(i);
+//        }
+//
+//        Intent intent = new Intent(getContext(),ResultActivity.class);
+//
+//        // Create a bundle object
+//        Bundle b = new Bundle();
+//        b.putStringArray("selectedItems", outputStrArr);
+//
+//        // Add the bundle to the intent.
+//        intent.putExtras(b);
+//
+//        // start the ResultActivity
+//        startActivity(intent);
     }
 }

@@ -63,6 +63,106 @@
             android:inputType="textPassword" />
 
         <TextView
+            android:id="@+id/txtLembrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lembrete:" />
+
+        <EditText
+            android:id="@+id/campoLembrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/txtEstadoCivil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estado Civil:" />
+
+        <EditText
+            android:id="@+id/campoEstadoCivil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/txtProfissao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profissão:" />
+
+        <EditText
+            android:id="@+id/campoProfissao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/txtNomeMae"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome da Mãe:" />
+
+        <EditText
+            android:id="@+id/campoNomeMae"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/txtNomePai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome do Pai:" />
+
+        <EditText
+            android:id="@+id/campoNomePai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/txtSexo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sexo:" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/sexoMasculino"
+                android:text="Masculino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/sexoFeminino"
+                android:text="Feminino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/txtNascimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nascimento:" />
+
+        <DatePicker
+            android:id="@+id/dateNascimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"/>
+
+        <TextView
             android:id="@+id/txtCPF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,6 +209,56 @@
             android:enabled="false"
             android:inputType="textPersonName" />
 
+        <TextView
+            android:id="@+id/txtEspecialidades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Especialidades:" />
+
+        <ListView
+            android:id="@+id/listaEspecialidades"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <TextView
+            android:id="@+id/txtPlanos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Especialidades:" />
+
+        <ListView
+            android:id="@+id/listaPlanos"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <TextView
+            android:id="@+id/txtConsultorios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Especialidades:" />
+
+        <ListView
+            android:id="@+id/listaConsultorios"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <TextView
+            android:id="@+id/txtMiniCurriculum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mini Curriculum:" />
+
+        <EditText
+            android:id="@+id/campoMiniCurriculum"
+            android:gravity="top|left"
+            android:scrollbars="vertical"
+            android:lines="6"
+            android:minLines="4"
+            android:maxLines="10"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" />
     </LinearLayout>
 
 </ScrollView>

@@ -18,17 +18,22 @@ public class Usuario implements FirebaseRTDBModel, FirebaseRTDBToken {
     private String nome;
     private String lembrete;
     private boolean ehMedico;
-    private String hashMedico;
     private long nascimento;
+    private Sexo sexo;
+    private String estadoCivil;
+    private String profissao;
+    private String nomeMae;
+    private String nomePai;
     private String token;
     private String cpf;
     private String rg;
     private Map<String, Object> contato = new HashMap<>();
     private Map<String, Object> endereco = new HashMap<>();
+    private String CRM;
     private List<String> especialidades;
     private List<String> planos;
-    private String CRM;
     private List<String> consultorios;
+    private String miniCurriculum;
 
     public Long getId() {
         return id;
@@ -72,14 +77,6 @@ public class Usuario implements FirebaseRTDBModel, FirebaseRTDBToken {
         this.ehMedico = ehMedico;
     }
 
-    public String getHashMedico() {
-        return hashMedico;
-    }
-
-    public void setHashMedico(String hashMedico) {
-        this.hashMedico = hashMedico;
-    }
-
     public long getNascimento() {
         return nascimento;
     }
@@ -88,10 +85,52 @@ public class Usuario implements FirebaseRTDBModel, FirebaseRTDBToken {
         this.nascimento = nascimento;
     }
 
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
+    }
+
+    public String getNomeMae() {
+        return nomeMae;
+    }
+
+    public void setNomeMae(String nomeMae) {
+        this.nomeMae = nomeMae;
+    }
+
+    public String getNomePai() {
+        return nomePai;
+    }
+
+    public void setNomePai(String nomePai) {
+        this.nomePai = nomePai;
+    }
+
+    @Override
     public String getToken() {
         return token;
     }
 
+    @Override
     public void setToken(String token) {
         this.token = token;
     }
@@ -128,6 +167,14 @@ public class Usuario implements FirebaseRTDBModel, FirebaseRTDBToken {
         this.endereco = endereco;
     }
 
+    public String getCRM() {
+        return CRM;
+    }
+
+    public void setCRM(String CRM) {
+        this.CRM = CRM;
+    }
+
     public List<String> getEspecialidades() {
         return especialidades;
     }
@@ -144,19 +191,19 @@ public class Usuario implements FirebaseRTDBModel, FirebaseRTDBToken {
         this.planos = planos;
     }
 
-    public String getCRM() {
-        return CRM;
-    }
-
-    public void setCRM(String CRM) {
-        this.CRM = CRM;
-    }
-
     public List<String> getConsultorios() {
         return consultorios;
     }
 
     public void setConsultorios(List<String> consultorios) {
         this.consultorios = consultorios;
+    }
+
+    public String getMiniCurriculum() {
+        return miniCurriculum;
+    }
+
+    public void setMiniCurriculum(String miniCurriculum) {
+        this.miniCurriculum = miniCurriculum;
     }
 }
