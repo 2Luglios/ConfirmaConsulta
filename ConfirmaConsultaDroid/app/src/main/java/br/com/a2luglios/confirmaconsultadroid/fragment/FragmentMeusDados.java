@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +23,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +35,7 @@ import java.util.List;
 import br.com.a2luglios.confirmaconsultadroid.PrincipalActivity;
 import br.com.a2luglios.confirmaconsultadroid.R;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseLoginInterface;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBSaved;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilAuth;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
@@ -68,9 +72,15 @@ public class FragmentMeusDados extends Fragment {
     private Button btnConsultorios;
     private EditText miniCurriculum;
 
-    private List<String> especialistas = new ArrayList<>();
+    private List<String> especialidades = new ArrayList<>();
     private List<String> planos = new ArrayList<>();
     private List<String> consultorios = new ArrayList<>();
+
+    private List<String> selectedEspecialidadesItems;
+    private List<String> selectedPlanosItems;
+    private List<String> selectedConsultoriosItems;
+
+    private Usuario usuario;
 
     @Nullable
     @Override
@@ -102,26 +112,26 @@ public class FragmentMeusDados extends Fragment {
         btnEspecialidades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(especialistas);
+                showDialog(especialidades, selectedEspecialidadesItems);
             }
         });
 
         btnPlanos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(planos);
+                showDialog(planos, selectedPlanosItems);
             }
         });
 
         btnConsultorios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(consultorios);
+                showDialog(consultorios, selectedConsultoriosItems);
             }
         });
 
-        Usuario usuario = new Preferencias(getContext()).getUsuario();
-        if ( usuario.getToken().equals("") ) {
+        usuario = new Preferencias(getContext()).getUsuario();
+        if ( usuario.getNome() != null && !usuario.getNome().isEmpty() ) {
             MapContato contato = new MapContato();
             contato.setMapa(usuario.getContato());
 
@@ -138,15 +148,23 @@ public class FragmentMeusDados extends Fragment {
             profissao.setText(usuario.getProfissao());
             nomeMae.setText(usuario.getNomeMae());
             nomePai.setText(usuario.getNomePai());
-            if ( usuario.getSexo() == Sexo.Masculino ) sexo.check(R.id.sexoMasculino); else sexo.check(R.id.sexoFeminino);
-            dataNascimento.init(nascimento.get(Calendar.YEAR), nascimento.get(Calendar.MONTH), nascimento.get(Calendar.DAY_OF_MONTH), null);
+            if (usuario.getSexo() == Sexo.Masculino) sexo.check(R.id.sexoMasculino);
+            else sexo.check(R.id.sexoFeminino);
+            dataNascimento.init(nascimento.get(Calendar.YEAR), nascimento.get(Calendar.MONTH),
+                    nascimento.get(Calendar.DAY_OF_MONTH), null);
             campoCPF.setText(usuario.getCpf());
             campoRG.setText(usuario.getRg());
             checkSouMedico.setChecked(usuario.isEhMedico());
             campoCRM.setText(usuario.getCRM());
             miniCurriculum.setText(usuario.getMiniCurriculum());
 
+            selectedEspecialidadesItems = usuario.getEspecialidades();
+            selectedPlanosItems = usuario.getPlanos();
+            selectedConsultoriosItems = usuario.getConsultorios();
+
             mudaEstado(checkSouMedico.isChecked());
+        } else {
+            usuario = new Usuario();
         }
 
         checkSouMedico.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -176,18 +194,18 @@ public class FragmentMeusDados extends Fragment {
         new FirebaseUtilDB().readRTDBPlain("especialidades", new FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
-                especialistas.add((String)obj);
+                especialidades.add((String) obj);
             }
         });
 
         new FirebaseUtilDB().readRTDBPlain("planos", new FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
-                planos.add((String)obj);
+                planos.add((String) obj);
             }
         });
 
-        new FirebaseUtilDB().readRTDB("consultorios", Consultorio.class,new FirebaseRTDBUpdate() {
+        new FirebaseUtilDB().readRTDB("consultorios", Consultorio.class, new FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
                 final Consultorio consultorio = (Consultorio) obj;
@@ -199,64 +217,38 @@ public class FragmentMeusDados extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-
         inflater.inflate(R.menu.menu_meus_dados_options, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menu_meus_dados_options_salvar:
-                if ( campoSenha.getEditableText().toString().equals(
-                        campoRepitaSenha.getEditableText().toString())) {
-                    new FirebaseUtilAuth(getActivity()).criarUsuario(
-                            campoEmail.getEditableText().toString(),
-                            campoSenha.getEditableText().toString(),
-                            new FirebaseLoginInterface() {
-                                @Override
-                                public void toDo(FirebaseUser user) {
-                                    Usuario usuario = new Usuario();
-                                    usuario.setNome(campoNome.getEditableText().toString());
-
-                                    MapContato contato = new MapContato();
-                                    contato.setEmail(campoEmail.getEditableText().toString());
-                                    usuario.setContato(contato.getMapa());
-
-                                    MapEndereco endereco = new MapEndereco();
-                                    endereco.setCep("");
-                                    usuario.setEndereco(endereco.getMapa());
-
-                                    usuario.setCpf(campoCPF.getEditableText().toString());
-                                    usuario.setRg(campoRG.getEditableText().toString());
-                                    usuario.setEhMedico(checkSouMedico.isChecked());
-                                    usuario.setCRM(campoCRM.getEditableText().toString());
-
-                                    usuario.setEspecialidades(new ArrayList<String>());
-                                    usuario.getEspecialidades().add("lalalalala");
-
-                                    usuario.setPlanos(new ArrayList<String>());
-                                    usuario.getPlanos().add("lalalalala");
-
-                                    usuario.setConsultorios(new ArrayList<String>());
-                                    usuario.getConsultorios().add("lalalalala");
-
-                                    new Preferencias(getActivity()).setUsuario(usuario);
-
-                                    new FirebaseUtilDB().saveOrUpdate("usuarios", usuario);
-
-                                    startActivity(new Intent(getActivity(), PrincipalActivity.class));
-
-                                    getActivity().finish();
-                                }
-
-                                @Override
-                                public void erro(String txt) {
-                                    Toast.makeText(getContext(), txt, Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                String senha = campoSenha.getEditableText().toString();
+                String repitaSenha = campoRepitaSenha.getEditableText().toString();
+                String email = campoEmail.getEditableText().toString();
+                if (senha.isEmpty()) {
+                    salvarUsuario();
                 } else {
-                    Toast.makeText(getContext(), "As senhas devem ser iguais...", Toast.LENGTH_SHORT).show();
+                    if (senha.equals(repitaSenha)) {
+                        new FirebaseUtilAuth(getActivity()).criarUsuario(email, senha,
+                                new FirebaseLoginInterface() {
+                                    @Override
+                                    public void toDo(FirebaseUser user) {
+                                        salvarUsuario();
+                                        getActivity().finish();
+                                    }
+
+                                    @Override
+                                    public void erro(String txt) {
+                                        Toast.makeText(getContext(), txt, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    } else {
+                        Toast.makeText(getContext(), "As senhas devem ser iguais...", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
                 break;
             case R.id.menu_meus_dados_options_logout:
                 new FirebaseUtilAuth(getActivity()).logout();
@@ -266,36 +258,86 @@ public class FragmentMeusDados extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void showDialog(List<String> listToShow) {
-        // TODO tem que trazer populado com o que o cara já escreveu...
+    private void salvarUsuario() {
+        usuario.setNome(campoNome.getEditableText().toString());
 
+        MapContato contato = new MapContato();
+        contato.setEmail(campoEmail.getEditableText().toString());
+        usuario.setContato(contato.getMapa());
+
+        MapEndereco endereco = new MapEndereco();
+        endereco.setCep("");
+        usuario.setEndereco(endereco.getMapa());
+
+        usuario.setLembrete(lembrete.getEditableText().toString());
+        usuario.setEstadoCivil(estadoCivil.getEditableText().toString());
+        usuario.setProfissao(profissao.getEditableText().toString());
+        usuario.setNomeMae(nomeMae.getEditableText().toString());
+        usuario.setNomePai(nomePai.getEditableText().toString());
+
+        switch(sexo.getCheckedRadioButtonId()) {
+            case R.id.sexoMasculino:
+                usuario.setSexo(Sexo.Masculino);
+                break;
+            case R.id.sexoFeminino:
+                usuario.setSexo(Sexo.Feminino);
+                break;
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, dataNascimento.getYear());
+        calendar.set(Calendar.MONTH, dataNascimento.getMonth());
+        calendar.set(Calendar.DAY_OF_MONTH, dataNascimento.getDayOfMonth());
+
+        usuario.setNascimento(calendar.getTimeInMillis());
+        usuario.setCpf(campoCPF.getEditableText().toString());
+        usuario.setRg(campoRG.getEditableText().toString());
+        usuario.setEhMedico(checkSouMedico.isChecked());
+        usuario.setCRM(campoCRM.getEditableText().toString());
+
+        usuario.setEspecialidades(selectedEspecialidadesItems);
+        usuario.setPlanos(selectedPlanosItems);
+        usuario.setConsultorios(selectedConsultoriosItems);
+
+        new FirebaseUtilDB().saveOrUpdate("usuarios", usuario, new FirebaseRTDBSaved() {
+            @Override
+            public void saved() {
+                new Preferencias(getActivity()).setUsuario(usuario);
+
+                startActivity(new Intent(getActivity(), PrincipalActivity.class));
+            }
+        });
+    }
+
+    private void showDialog(List<String> listToShow, final List<String> selected) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         dialog.setTitle("Lista");
         View v = LayoutInflater.from(getContext()).inflate(R.layout.dialog_generic_list, null);
         final ListView lista = (ListView) v.findViewById(R.id.lista);
         lista.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         lista.setAdapter(new ArrayAdapter<String>(getContext(),
-                        android.R.layout.simple_list_item_multiple_choice, listToShow));
+                android.R.layout.simple_list_item_multiple_choice, listToShow));
+
+        for (int i = 0; i < listToShow.size(); i++) {
+            if (selected.contains(listToShow.get(i))) {
+                lista.setItemChecked(i, true);
+            }
+        }
+
         dialog.setView(v);
         dialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int a) {
                 SparseBooleanArray checked = lista.getCheckedItemPositions();
-                ArrayList<String> selectedItems = new ArrayList<String>();
+                selected.clear();
                 for (int i = 0; i < checked.size(); i++) {
                     int position = checked.keyAt(i);
-                    if (checked.valueAt(i)) selectedItems.add((String) lista.getAdapter().getItem(position));
+                    if (checked.valueAt(i)) {
+                        selected.add((String) lista.getAdapter().getItem(position));
+                    }
                 }
-
-                String[] outputStrArr = new String[selectedItems.size()];
-
-                for (int i = 0; i < selectedItems.size(); i++) {
-                    outputStrArr[i] = selectedItems.get(i);
-                }
-                Toast.makeText(getContext(), "Selecionou: " + selectedItems.size() + " itens", Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();
     }
-
 }

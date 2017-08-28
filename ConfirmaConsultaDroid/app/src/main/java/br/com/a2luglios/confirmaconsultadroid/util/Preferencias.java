@@ -2,6 +2,7 @@ package br.com.a2luglios.confirmaconsultadroid.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -116,12 +117,10 @@ public class Preferencias {
         endereco.setPais(prefs.getString("pais", ""));
         usuario.setEndereco(endereco.getMapa());
 
-        Set<String> vazio = new HashSet<>();
-
         usuario.setCRM(prefs.getString("crm", ""));
-        usuario.setEspecialidades(converteSetStringToListString(prefs.getStringSet("", vazio)));
-        usuario.setPlanos(converteSetStringToListString(prefs.getStringSet("", vazio)));
-        usuario.setConsultorios(converteSetStringToListString(prefs.getStringSet("", vazio)));
+        usuario.setEspecialidades(converteSetStringToListString(prefs.getStringSet("especialidades", null)));
+        usuario.setPlanos(converteSetStringToListString(prefs.getStringSet("planos", null)));
+        usuario.setConsultorios(converteSetStringToListString(prefs.getStringSet("consultorios", null)));
         usuario.setCRM(prefs.getString("miniCurriculum", ""));
 
         return usuario;
@@ -137,8 +136,10 @@ public class Preferencias {
 
     public List<String> converteSetStringToListString(Set<String> set) {
         List<String> lista = new ArrayList<>();
-        for(String s : set) {
-            lista.add(s);
+        if ( set != null ) {
+            for(String s : set) {
+                lista.add(s);
+            }
         }
         return lista;
     }

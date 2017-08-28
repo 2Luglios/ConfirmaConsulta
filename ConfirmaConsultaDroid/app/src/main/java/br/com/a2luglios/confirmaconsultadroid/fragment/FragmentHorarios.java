@@ -1,5 +1,7 @@
 package br.com.a2luglios.confirmaconsultadroid.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -24,46 +26,26 @@ import br.com.a2luglios.confirmaconsultadroid.R;
  * Created by ettoreluglio on 25/08/17.
  */
 
-public class FragmentHorarios extends Fragment implements WeekView.EventClickListener, WeekView.EventLongPressListener, MonthLoader.MonthChangeListener {
+public class FragmentHorarios extends Fragment implements WeekView.EventClickListener,
+        WeekView.EventLongPressListener, MonthLoader.MonthChangeListener {
 
-    List<WeekViewEvent> events = new ArrayList<>();
+    private List<WeekViewEvent> events = new ArrayList<>();
+    private WeekView mWeekView;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_horarios, null);
-
-        // Get a reference for the week view in the layout.
-        final WeekView mWeekView = (WeekView) v.findViewById(R.id.weekView);
-
-        // Set an action when any event is clicked.
+        mWeekView = (WeekView) v.findViewById(R.id.weekView);
         mWeekView.setOnEventClickListener(this);
-
-        // The week view has infinite scrolling horizontally. We have to provide the events of a
-        // month every time the month changes on the week view.
         mWeekView.setMonthChangeListener(this);
-
-        // Set long press listener for events.
         mWeekView.setEventLongPressListener(this);
 
         mWeekView.setEmptyViewClickListener(new WeekView.EmptyViewClickListener() {
             @Override
             public void onEmptyViewClicked(Calendar time) {
-                Toast.makeText(getContext(), "Quer um evento novo? " + time, Toast.LENGTH_LONG).show();
-
-                WeekViewEvent event = new WeekViewEvent();
-                event.setName("Dentista");
-                event.setLocation("Sorriso de Novela");
-                event.setColor(Color.GREEN);
-                event.setStartTime(time);
-                Calendar c = (Calendar) time.clone();
-                c.add(Calendar.HOUR, 1);
-                event.setEndTime(c);
-                events.add(event);
-
-                mWeekView.notifyDatasetChanged();
-
+                showAlerta(time);
             }
         });
 
@@ -78,14 +60,49 @@ public class FragmentHorarios extends Fragment implements WeekView.EventClickLis
         return v;
     }
 
-    @Override
-    public void onEventClick(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(getActivity(), ""+event.getStartTime(), Toast.LENGTH_LONG).show();
+    private void showAlerta(final Calendar time) {
+        AlertDialog.Builder alerta = new AlertDialog.Builder(getContext());
+        alerta.setTitle("Adicionando evento...");
+        alerta.setMessage("Quer um evento?");
+        alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                WeekViewEvent event = new WeekViewEvent();
+                event.setName("Dentista");
+                event.setLocation("Sorriso de Novela");
+                event.setColor(Color.GREEN);
+                event.setStartTime(time);
+                Calendar c = (Calendar) time.clone();
+                c.add(Calendar.HOUR, 1);
+                event.setEndTime(c);
+                events.add(event);
+
+                mWeekView.notifyDatasetChanged();
+            }
+        });
+        alerta.setNegativeButton("Não", null);
+        alerta.show();
     }
 
     @Override
-    public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
+    public void onEventClick(WeekViewEvent event, RectF eventRect) {
+        Toast.makeText(getActivity(), ""+event.getName(), Toast.LENGTH_LONG).show();
+    }
 
+    @Override
+    public void onEventLongPress(final WeekViewEvent event, RectF eventRect) {
+        AlertDialog.Builder alerta = new AlertDialog.Builder(getContext());
+        alerta.setTitle("Remover evento?");
+        alerta.setMessage("" + event.getName());
+        alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                events.remove(event);
+                mWeekView.notifyDatasetChanged();
+            }
+        });
+        alerta.setNegativeButton("Não", null);
+        alerta.show();
     }
 
     @Override

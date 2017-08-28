@@ -29,15 +29,23 @@ public class FirebaseUtilDB {
         database = FirebaseDatabase.getInstance();
     }
 
-    public void saveOrUpdate(String raiz, FirebaseRTDBInterface modelo) {
+    public void saveOrUpdate(String raiz, FirebaseRTDBInterface modelo, FirebaseRTDBSaved saved) {
         if ( modelo instanceof FirebaseRTDBToken ) {
             ((FirebaseRTDBToken)modelo).setToken(FirebaseInstanceId.getInstance().getToken());
         }
-        DatabaseReference ref = database.getReference(raiz).push();
-        if ( modelo instanceof FirebaseRTDBModel ) {
-            ((FirebaseRTDBModel)modelo).setHash(ref.getKey());
+        String hash = ((FirebaseRTDBModel)modelo).getHash();
+        if ( hash == null || hash.isEmpty() ) {
+            DatabaseReference ref = database.getReference(raiz).push();
+            if ( modelo instanceof FirebaseRTDBModel ) {
+                ((FirebaseRTDBModel)modelo).setHash(ref.getKey());
+            }
+            ref.setValue(modelo);
+            if ( saved != null ) saved.saved();
+        } else {
+            DatabaseReference ref = database.getReference(raiz + "/" + hash);
+            ref.setValue(modelo);
+            if ( saved != null ) saved.saved();
         }
-        ref.setValue(modelo);
     }
 
     public void readRTDB(String raiz, final Class<? extends FirebaseRTDBModel> clazz, final FirebaseRTDBUpdate updateMensagens) {
