@@ -134,19 +134,22 @@
             android:text="Sexo:" />
 
         <RadioGroup
+            android:id="@+id/radioSexo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <RadioButton
                 android:id="@+id/sexoMasculino"
-                android:text="Masculino"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Masculino" />
+
             <RadioButton
                 android:id="@+id/sexoFeminino"
-                android:text="Feminino"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Feminino" />
         </RadioGroup>
 
         <TextView
@@ -215,32 +218,35 @@
             android:layout_height="wrap_content"
             android:text="Especialidades:" />
 
-        <ListView
-            android:id="@+id/listaEspecialidades"
+        <Button
+            android:id="@+id/btnEspecialidades"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="match_parent"
+            android:text="Selecione..." />
 
         <TextView
             android:id="@+id/txtPlanos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Especialidades:" />
+            android:text="Planos:" />
 
-        <ListView
-            android:id="@+id/listaPlanos"
+        <Button
+            android:id="@+id/btnPlanos"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="match_parent"
+            android:text="Selecione..." />
 
         <TextView
             android:id="@+id/txtConsultorios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Especialidades:" />
+            android:text="Consultorios:" />
 
-        <ListView
-            android:id="@+id/listaConsultorios"
+        <Button
+            android:id="@+id/btnConsultorios"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="match_parent"
+            android:text="Selecione..." />
 
         <TextView
             android:id="@+id/txtMiniCurriculum"
