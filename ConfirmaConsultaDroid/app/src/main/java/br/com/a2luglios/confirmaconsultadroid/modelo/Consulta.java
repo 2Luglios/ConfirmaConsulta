@@ -14,13 +14,15 @@ public class Consulta implements FirebaseRTDBModel{
 
     private Long id;
     private String hash;
-    private String medico;
-    private long data;
+    private String chavemedicoconsultorio;
     private Confirmacao confirmacao;
-    private String consultorio;
     private int alarme;
     private String procedimento;
-    private String chavemedicoconsultorio;
+    private long dataInicio;
+    private long dataTermino;
+    private String medico;
+    private String consultorio;
+    private String idCalendario;
 
     public Long getId() {
         return id;
@@ -48,12 +50,20 @@ public class Consulta implements FirebaseRTDBModel{
         this.medico = medico;
     }
 
-    public long getData() {
-        return data;
+    public long getDataInicio() {
+        return dataInicio;
     }
 
-    public void setData(long data) {
-        this.data = data;
+    public void setDataInicio(long dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public long getDataTermino() {
+        return dataTermino;
+    }
+
+    public void setDataTermino(long dataTermino) {
+        this.dataTermino = dataTermino;
     }
 
     public Confirmacao getConfirmacao() {
@@ -96,11 +106,20 @@ public class Consulta implements FirebaseRTDBModel{
         this.chavemedicoconsultorio = chavemedicoconsultorio;
     }
 
+    public String getIdCalendario() {
+        return idCalendario;
+    }
+
+    public void setIdCalendario(String idCalendario) {
+        this.idCalendario = idCalendario;
+    }
+
     public ContentValues getContentValues() {
         ContentValues values = new ContentValues();
         values.put("id", id);
         values.put("medico", medico);
-        values.put("data", data);
+        values.put("dataInicio", dataInicio);
+        values.put("dataTermino", dataTermino);
         values.put("confirmacao", confirmacao.name());
         values.put("alarme", alarme);
         values.put("consultorio", consultorio);

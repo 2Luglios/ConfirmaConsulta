@@ -51,7 +51,7 @@ public class ConsultaAdapter extends BaseAdapter {
         View v = LayoutInflater.from(ctx).inflate(R.layout.item_consulta_layout, null);
 
         Date data = new Date();
-        data.setTime(consultas.get(i).getData());
+        data.setTime(consultas.get(i).getDataInicio());
 
         TextView txtData = (TextView) v.findViewById(R.id.txtData);
         txtData.setText(sdfData.format(data));

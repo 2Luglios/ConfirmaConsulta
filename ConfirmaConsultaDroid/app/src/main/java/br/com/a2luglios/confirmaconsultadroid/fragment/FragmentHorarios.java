@@ -7,9 +7,14 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.MonthLoader;
@@ -36,6 +41,11 @@ public class FragmentHorarios extends Fragment implements WeekView.EventClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        long data = getArguments().getLong("data", Calendar.getInstance().getTimeInMillis());
+        final Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(data);
+
         View v = inflater.inflate(R.layout.fragment_horarios, null);
         mWeekView = (WeekView) v.findViewById(R.id.weekView);
         mWeekView.setOnEventClickListener(this);
@@ -48,12 +58,12 @@ public class FragmentHorarios extends Fragment implements WeekView.EventClickLis
                 showAlerta(time);
             }
         });
-
+        mWeekView.goToDate(c);
         mWeekView.setHorizontalFlingEnabled(false);
         mWeekView.setScrollListener(new WeekView.ScrollListener() {
             @Override
             public void onFirstVisibleDayChanged(Calendar newFirstVisibleDay, Calendar oldFirstVisibleDay) {
-                mWeekView.goToToday();
+                mWeekView.goToDate(c);
             }
         });
 
@@ -61,20 +71,60 @@ public class FragmentHorarios extends Fragment implements WeekView.EventClickLis
     }
 
     private void showAlerta(final Calendar time) {
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_horario, null);
+
+        final TextView txtMedico = (TextView)v.findViewById(R.id.txtMedico);
+        txtMedico.setText("Dr. Michelle");
+        final TextView txtConsultorio = (TextView)v.findViewById(R.id.txtConsultorio);
+        txtConsultorio.setText("Consultorio do Médico");
+        final EditText horaTermino = (EditText) v.findViewById(R.id.horaTermino);
+        int hora = time.get(Calendar.HOUR_OF_DAY)+1;
+        horaTermino.setText(hora<10?"0"+hora:hora + ":00");
+        horaTermino.setEnabled(false);
+        final TimePicker dataInicio = (TimePicker)v.findViewById(R.id.horaInicio);
+        dataInicio.setCurrentHour(time.get(Calendar.HOUR_OF_DAY));
+        dataInicio.setIs24HourView(true);
+        dataInicio.setCurrentMinute(0);
+        dataInicio.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker timePicker, int i, int i1) {
+                if ( i1 != 0 ) timePicker.setCurrentMinute(0);
+                i+=1;
+                horaTermino.setText(i<10?"0"+i:i + ":00");
+            }
+        });
+        Spinner spinnerProcedimento = (Spinner)v.findViewById(R.id.spinnerProcedimento);
+        Spinner spinnerAlarme = (Spinner)v.findViewById(R.id.spinnerAlarme);
+
         AlertDialog.Builder alerta = new AlertDialog.Builder(getContext());
         alerta.setTitle("Adicionando evento...");
-        alerta.setMessage("Quer um evento?");
+        alerta.setView(v);
         alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 WeekViewEvent event = new WeekViewEvent();
-                event.setName("Dentista");
-                event.setLocation("Sorriso de Novela");
+                event.setName(txtMedico.getText().toString());
+                event.setLocation(txtConsultorio.getText().toString());
                 event.setColor(Color.GREEN);
-                event.setStartTime(time);
-                Calendar c = (Calendar) time.clone();
-                c.add(Calendar.HOUR, 1);
-                event.setEndTime(c);
+
+                Calendar inicio = Calendar.getInstance();
+                inicio.set(Calendar.DAY_OF_MONTH, time.get(Calendar.DAY_OF_MONTH));
+                inicio.set(Calendar.MONTH, time.get(Calendar.MONTH));
+                inicio.set(Calendar.YEAR, time.get(Calendar.YEAR));
+                inicio.set(Calendar.HOUR_OF_DAY, dataInicio.getCurrentHour());
+                inicio.set(Calendar.MINUTE, 0);
+                inicio.set(Calendar.SECOND, 0);
+                event.setStartTime(inicio);
+
+                Calendar fim = Calendar.getInstance();
+                fim.set(Calendar.DAY_OF_MONTH, time.get(Calendar.DAY_OF_MONTH));
+                fim.set(Calendar.MONTH, time.get(Calendar.MONTH));
+                fim.set(Calendar.YEAR, time.get(Calendar.YEAR));
+                fim.set(Calendar.HOUR_OF_DAY, dataInicio.getCurrentHour()+1);
+                fim.set(Calendar.MINUTE, 0);
+                fim.set(Calendar.SECOND, 0);
+                event.setEndTime(fim);
+
                 events.add(event);
 
                 mWeekView.notifyDatasetChanged();

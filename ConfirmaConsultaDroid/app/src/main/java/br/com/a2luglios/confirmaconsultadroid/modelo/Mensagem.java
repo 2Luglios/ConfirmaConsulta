@@ -14,6 +14,10 @@ public class Mensagem implements FirebaseRTDBModel {
     private String destino;
     private String data;
     private String mensagem;
+    private String tipo;
+    private String estado;
+    private long validade;
+    private String imagem;
 
     public Long getId() {
         return id;
@@ -61,5 +65,37 @@ public class Mensagem implements FirebaseRTDBModel {
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public long getValidade() {
+        return validade;
+    }
+
+    public void setValidade(long validade) {
+        this.validade = validade;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 }

@@ -1,10 +1,8 @@
-package br.com.a2luglios.confirmaconsultadroid.util;
+package br.com.a2luglios.confirmaconsultadroid.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import br.com.a2luglios.confirmaconsultadroid.dao.MedicoDao;
 
 /**
  * Created by ettoreluglio on 19/06/17.
@@ -21,15 +19,11 @@ public class BancoUtil extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
-        sqLiteDatabase.execSQL(MedicoDao.CREATE_QUERY);
-
+        //sqLiteDatabase.execSQL(MedicoDao.CREATE_QUERY);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
-        sqLiteDatabase.execSQL(MedicoDao.UPDATE_QUERY);
-
+        //sqLiteDatabase.execSQL(MedicoDao.UPDATE_QUERY);
     }
 }

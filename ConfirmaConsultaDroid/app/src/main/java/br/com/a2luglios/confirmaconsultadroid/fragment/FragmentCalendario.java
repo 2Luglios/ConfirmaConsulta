@@ -70,6 +70,10 @@ public class FragmentCalendario extends Fragment {
 
                 FragmentHorarios horarios = new FragmentHorarios();
 
+                Bundle argumentos = new Bundle();
+                argumentos.putLong("data", date.getTime());
+                horarios.setArguments(argumentos);
+
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.replace(R.id.fragment_place, horarios);
                 transaction.addToBackStack(null);
