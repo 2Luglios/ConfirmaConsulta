@@ -38,7 +38,7 @@ public class ConsultorioAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return consultorios.get(i).getId();
+        return i;
     }
 
     @Override

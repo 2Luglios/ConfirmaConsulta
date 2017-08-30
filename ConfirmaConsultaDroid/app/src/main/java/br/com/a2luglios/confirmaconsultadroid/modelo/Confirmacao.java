@@ -7,8 +7,8 @@ package br.com.a2luglios.confirmaconsultadroid.modelo;
 public enum Confirmacao {
 
     Marcado,
+    Solicitado,
     Confirmado,
-    Cancelado,
-    EmEspera
+    Cancelado
 
 }

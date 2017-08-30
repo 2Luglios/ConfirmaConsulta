@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
-import br.com.a2luglios.confirmaconsultadroid.modelo.Medico;
+import br.com.a2luglios.confirmaconsultadroid.modelo.Usuario;
 
 /**
  * Created by ettoreluglio on 20/06/17.
@@ -19,9 +19,9 @@ import br.com.a2luglios.confirmaconsultadroid.modelo.Medico;
 public class MedicoAdapter extends BaseAdapter {
 
     private Context ctx;
-    private List<Medico> medicos;
+    private List<Usuario> medicos;
 
-    public MedicoAdapter(Context ctx, List<Medico> medicos) {
+    public MedicoAdapter(Context ctx, List<Usuario> medicos) {
         this.ctx = ctx;
         this.medicos = medicos;
     }
@@ -38,7 +38,7 @@ public class MedicoAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return medicos.get(i).getId();
+        return i;
     }
 
     @Override

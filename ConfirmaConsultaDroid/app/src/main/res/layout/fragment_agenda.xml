@@ -9,21 +9,14 @@
     tools:layout_editor_absoluteX="0dp">
 
 
-    <br.com.a2luglios.confirmaconsultadroid.customview.CustomCalendarioView
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:id="@+id/frameLayout">
-
-    </br.com.a2luglios.confirmaconsultadroid.customview.CustomCalendarioView>
-
     <ListView
-        android:id="@+id/lista"
+        android:id="@+id/listConsultas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/frameLayout" />
+        android:layout_below="@+id/calendario" />
 
     <Button
-        android:id="@+id/addTreino"
+        android:id="@+id/btnAddConsulta"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"

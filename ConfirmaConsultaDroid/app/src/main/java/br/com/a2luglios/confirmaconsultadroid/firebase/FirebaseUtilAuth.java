@@ -28,51 +28,29 @@ public class FirebaseUtilAuth {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    public void criarUsuario(String email, String senha, String nome) {
-        final UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(nome).build();
-
+    public void criarUsuario(String email, String senha, final FirebaseLoginInterface loginInterface) {
         mAuth.createUserWithEmailAndPassword(email, senha)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Log.d("Splash", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-
-                            user.updateProfile(profileUpdates)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Log.d("Splash", "User profile updated.");
-                                            }
-                                        }
-                                    });
+                            loginInterface.toDo(mAuth.getCurrentUser());
                         } else {
-                            Log.w("Splash", "createUserWithEmail:failure", task.getException());
+                            loginInterface.erro("Falha ao criar usuário: " + task.getException().getMessage());
                         }
                     }
                 });
     }
 
-    public void signIn(String email, String senha) {
+    public void signIn(String email, String senha, final FirebaseLoginInterface loginInterface) {
         mAuth.signInWithEmailAndPassword("ettore.tamadrum@gmail.com", "amoramor")
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("Splash", "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Log.d("Splash", "onComplete: " + user.getDisplayName());
-
+                            loginInterface.toDo(mAuth.getCurrentUser());
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("Splash", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(activity, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            Log.d("Splash", "else: " + null);
+                            loginInterface.erro("Falha de autenticao: " + task.getException().getMessage());
                         }
                     }
                 });
@@ -80,6 +58,7 @@ public class FirebaseUtilAuth {
 
     public void logout() {
         mAuth.signOut();
+        Log.d("Auth", "LOGOUT");
     }
 
     public boolean isConnected() {

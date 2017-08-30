@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,49 +10,41 @@
         android:id="@+id/botoes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <ImageButton
-            android:id="@+id/home"
+            android:id="@+id/btnMeusDados"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:src="@android:drawable/ic_dialog_dialer"
-            android:text="Principal" />
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:background="#00ffffff"
+            android:src="@drawable/meus_dados"
+            android:text="Principal"
+            app:srcCompat="@drawable/meus_dados" />
 
         <ImageButton
-            android:id="@+id/meus_dados"
+            android:id="@+id/btnCalendario"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:src="@android:drawable/ic_dialog_dialer"
-            android:text="Usuários" />
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:background="#00ffffff"
+            android:src="@drawable/agenda"
+            android:text="Usuários"
+            app:srcCompat="@drawable/agenda" />
 
         <ImageButton
-            android:id="@+id/agenda"
+            android:id="@+id/btnNotificacoes"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:src="@android:drawable/ic_dialog_dialer"
-            android:text="Agenda" />
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:background="#00ffffff"
+            android:src="@drawable/com_not"
+            android:text="Agenda"
+            app:srcCompat="@drawable/com_not" />
 
-        <ImageButton
-            android:id="@+id/profissionais"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:src="@android:drawable/ic_dialog_dialer"
-            android:text="Profissionais" />
-
-        <ImageButton
-            android:id="@+id/notificacoes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:src="@android:drawable/ic_dialog_dialer"
-            android:text="Notificação" />
     </LinearLayout>
 
     <FrameLayout

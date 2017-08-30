@@ -3,7 +3,12 @@ package br.com.a2luglios.confirmaconsultadroid;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TabHost;
+import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -27,5 +32,4 @@ public class SplashActivity extends AppCompatActivity {
         }).start();
 
     }
-
 }
