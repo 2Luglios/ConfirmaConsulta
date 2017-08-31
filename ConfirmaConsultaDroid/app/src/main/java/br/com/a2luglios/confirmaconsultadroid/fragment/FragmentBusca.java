@@ -33,15 +33,46 @@ public class FragmentBusca extends Fragment {
     private List<String> listaEspecialidades;
     private List<Usuario> listaMedicos;
     private List<Consultorio> listaConsultorios;
+    private Spinner especialidades;
+    private Spinner medicos;
+    private Spinner consultorios;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_busca, null);
 
-        final Spinner especialidades = (Spinner) v.findViewById(R.id.spinnerEspecialidades);
-        final Spinner medicos = (Spinner) v.findViewById(R.id.spinnerMedicos);
-        final Spinner consultorios = (Spinner) v.findViewById(R.id.spinnerConsultorios);
+        especialidades = (Spinner) v.findViewById(R.id.spinnerEspecialidades);
+
+        medicos = (Spinner) v.findViewById(R.id.spinnerMedicos);
+
+        consultorios = (Spinner) v.findViewById(R.id.spinnerConsultorios);
+
+        Button btnIrParaCalendario = (Button) v.findViewById(R.id.btnIrParaCalendario);
+        btnIrParaCalendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getFragmentManager();
+
+                FragmentCalendario calendario = new FragmentCalendario();
+
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_place, calendario);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        return v;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        listaEspecialidades = new ArrayList<>();
+        listaMedicos = new ArrayList<>();
+        listaConsultorios = new ArrayList<>();
 
         new FirebaseUtilDB().readRTDBPlain("especialidades", new FirebaseRTDBUpdate() {
             @Override
@@ -66,30 +97,5 @@ public class FragmentBusca extends Fragment {
                 consultorios.setAdapter(new ConsultorioAdapter(getContext(), listaConsultorios));
             }
         });
-
-        Button btnIrParaCalendario = (Button) v.findViewById(R.id.btnIrParaCalendario);
-        btnIrParaCalendario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager manager = getFragmentManager();
-
-                FragmentCalendario calendario = new FragmentCalendario();
-
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.fragment_place, calendario);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });
-
-        return v;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        listaEspecialidades = new ArrayList<>();
-        listaMedicos = new ArrayList<>();
-        listaConsultorios = new ArrayList<>();
     }
 }

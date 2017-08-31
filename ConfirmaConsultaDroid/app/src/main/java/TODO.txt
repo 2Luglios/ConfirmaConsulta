@@ -1,9 +1,8 @@
 Add banco de mensagens
 Add banco de consulta
 Alterar Senha
-Spinner Alarme
 Cadastrar Calendario
-Spinner Procedimento
+
 
 
 

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,18 +23,23 @@ import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
+import br.com.a2luglios.confirmaconsultadroid.modelo.Usuario;
 
 /**
  * Created by ettoreluglio on 25/08/17.
  */
 
-public class FragmentHorarios extends Fragment implements WeekView.EventClickListener,
-        WeekView.EventLongPressListener, MonthLoader.MonthChangeListener {
+public class FragmentHorarios extends Fragment {
 
+    private List<String> listaProcedimentos;
+    private List<String> horariosAlarme;
     private List<WeekViewEvent> events = new ArrayList<>();
     private WeekView mWeekView;
 
@@ -48,9 +54,38 @@ public class FragmentHorarios extends Fragment implements WeekView.EventClickLis
 
         View v = inflater.inflate(R.layout.fragment_horarios, null);
         mWeekView = (WeekView) v.findViewById(R.id.weekView);
-        mWeekView.setOnEventClickListener(this);
-        mWeekView.setMonthChangeListener(this);
-        mWeekView.setEventLongPressListener(this);
+
+        mWeekView.setOnEventClickListener(new WeekView.EventClickListener() {
+            @Override
+            public void onEventClick(WeekViewEvent event, RectF eventRect) {
+                Toast.makeText(getActivity(), "" + event.getName(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        mWeekView.setMonthChangeListener(new MonthLoader.MonthChangeListener() {
+            @Override
+            public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
+                return events;
+            }
+        });
+
+        mWeekView.setEventLongPressListener(new WeekView.EventLongPressListener() {
+            @Override
+            public void onEventLongPress(final WeekViewEvent event, RectF eventRect) {
+                AlertDialog.Builder alerta = new AlertDialog.Builder(getContext());
+                alerta.setTitle("Remover evento?");
+                alerta.setMessage("" + event.getName());
+                alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        events.remove(event);
+                        mWeekView.notifyDatasetChanged();
+                    }
+                });
+                alerta.setNegativeButton("Não", null);
+                alerta.show();
+            }
+        });
 
         mWeekView.setEmptyViewClickListener(new WeekView.EmptyViewClickListener() {
             @Override
@@ -58,8 +93,11 @@ public class FragmentHorarios extends Fragment implements WeekView.EventClickLis
                 showAlerta(time);
             }
         });
+
         mWeekView.goToDate(c);
+
         mWeekView.setHorizontalFlingEnabled(false);
+
         mWeekView.setScrollListener(new WeekView.ScrollListener() {
             @Override
             public void onFirstVisibleDayChanged(Calendar newFirstVisibleDay, Calendar oldFirstVisibleDay) {
@@ -70,17 +108,35 @@ public class FragmentHorarios extends Fragment implements WeekView.EventClickLis
         return v;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        listaProcedimentos = new ArrayList<>();
+        new FirebaseUtilDB().readRTDBPlain("procedimentos", new FirebaseRTDBUpdate() {
+            @Override
+            public void updateMensagem(Object obj) {
+                listaProcedimentos.add(obj.toString());
+            }
+        });
+
+        horariosAlarme = Arrays.asList("1", "2", "3", "4", "5", "6");
+    }
+
     private void showAlerta(final Calendar time) {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_horario, null);
 
         final TextView txtMedico = (TextView)v.findViewById(R.id.txtMedico);
         txtMedico.setText("Dr. Michelle");
+
         final TextView txtConsultorio = (TextView)v.findViewById(R.id.txtConsultorio);
         txtConsultorio.setText("Consultorio do Médico");
+
         final EditText horaTermino = (EditText) v.findViewById(R.id.horaTermino);
         int hora = time.get(Calendar.HOUR_OF_DAY)+1;
         horaTermino.setText(hora<10?"0"+hora:hora + ":00");
         horaTermino.setEnabled(false);
+
         final TimePicker dataInicio = (TimePicker)v.findViewById(R.id.horaInicio);
         dataInicio.setCurrentHour(time.get(Calendar.HOUR_OF_DAY));
         dataInicio.setIs24HourView(true);
@@ -93,8 +149,14 @@ public class FragmentHorarios extends Fragment implements WeekView.EventClickLis
                 horaTermino.setText(i<10?"0"+i:i + ":00");
             }
         });
-        Spinner spinnerProcedimento = (Spinner)v.findViewById(R.id.spinnerProcedimento);
-        Spinner spinnerAlarme = (Spinner)v.findViewById(R.id.spinnerAlarme);
+
+        final Spinner spinnerProcedimento = (Spinner)v.findViewById(R.id.spinnerProcedimento);
+        spinnerProcedimento.setAdapter(new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_list_item_1, listaProcedimentos));
+
+        final Spinner spinnerAlarme = (Spinner)v.findViewById(R.id.spinnerAlarme);
+        spinnerAlarme.setAdapter(new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_list_item_1, horariosAlarme));
 
         AlertDialog.Builder alerta = new AlertDialog.Builder(getContext());
         alerta.setTitle("Adicionando evento...");
@@ -134,29 +196,4 @@ public class FragmentHorarios extends Fragment implements WeekView.EventClickLis
         alerta.show();
     }
 
-    @Override
-    public void onEventClick(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(getActivity(), ""+event.getName(), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onEventLongPress(final WeekViewEvent event, RectF eventRect) {
-        AlertDialog.Builder alerta = new AlertDialog.Builder(getContext());
-        alerta.setTitle("Remover evento?");
-        alerta.setMessage("" + event.getName());
-        alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                events.remove(event);
-                mWeekView.notifyDatasetChanged();
-            }
-        });
-        alerta.setNegativeButton("Não", null);
-        alerta.show();
-    }
-
-    @Override
-    public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-        return events;
-    }
 }
