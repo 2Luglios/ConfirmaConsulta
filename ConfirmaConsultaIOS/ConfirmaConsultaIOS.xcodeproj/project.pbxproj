@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F1BB3291F4F0FE900F456FA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BB3281F4F0FE900F456FA /* LoginViewController.swift */; };
 		1F210ADA1F3F21190037F19C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F210AD91F3F21190037F19C /* AppDelegate.swift */; };
 		1F210ADC1F3F21190037F19C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F210ADB1F3F21190037F19C /* ViewController.swift */; };
 		1F210ADF1F3F21190037F19C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F210ADD1F3F21190037F19C /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 		1F210AF21F3F21190037F19C /* ConfirmaConsultaIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F210AF11F3F21190037F19C /* ConfirmaConsultaIOSTests.swift */; };
 		1F210AFD1F3F21190037F19C /* ConfirmaConsultaIOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F210AFC1F3F21190037F19C /* ConfirmaConsultaIOSUITests.swift */; };
 		1F210B0B1F3F221B0037F19C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F210B0A1F3F221B0037F19C /* GoogleService-Info.plist */; };
+		1FB752891F4F5D5600B134D5 /* CadastroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB752881F4F5D5600B134D5 /* CadastroViewController.swift */; };
 		38CD00F292C703837825BA0F /* Pods_ConfirmaConsultaIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80961D0E91339579E4503055 /* Pods_ConfirmaConsultaIOS.framework */; };
 		AB01CD5D2940E67CB663FB6A /* Pods_ConfirmaConsultaIOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC5ADD9C0D3A4F3BA36E05F /* Pods_ConfirmaConsultaIOSUITests.framework */; };
 		CBD352B815F8969DED3B4BC0 /* Pods_ConfirmaConsultaIOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46894EFD5CA275C2F03C75A /* Pods_ConfirmaConsultaIOSTests.framework */; };
@@ -40,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		1BC07A55F21B10ABE8A6E2B6 /* Pods-ConfirmaConsultaIOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfirmaConsultaIOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConfirmaConsultaIOSUITests/Pods-ConfirmaConsultaIOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1F1BB3281F4F0FE900F456FA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1F210AD61F3F21190037F19C /* ConfirmaConsultaIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConfirmaConsultaIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F210AD91F3F21190037F19C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F210ADB1F3F21190037F19C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 		1F210AFE1F3F21190037F19C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F210B0A1F3F221B0037F19C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1F210B0C1F3F406A0037F19C /* ConfirmaConsultaIOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ConfirmaConsultaIOS.entitlements; sourceTree = "<group>"; };
+		1FB752881F4F5D5600B134D5 /* CadastroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CadastroViewController.swift; sourceTree = "<group>"; };
 		23B2A8425537DA515C57FF24 /* Pods-ConfirmaConsultaIOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfirmaConsultaIOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ConfirmaConsultaIOSUITests/Pods-ConfirmaConsultaIOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3B32161B5F4E4F38D6F1E6A9 /* Pods-ConfirmaConsultaIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfirmaConsultaIOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ConfirmaConsultaIOS/Pods-ConfirmaConsultaIOS.release.xcconfig"; sourceTree = "<group>"; };
 		3B9FE8889206F342A420F342 /* Pods-ConfirmaConsultaIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConfirmaConsultaIOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConfirmaConsultaIOS/Pods-ConfirmaConsultaIOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 				1F210AE81F3F21190037F19C /* Info.plist */,
 				1F210AE01F3F21190037F19C /* ConfirmaConsultaIOS.xcdatamodeld */,
 				1F210B0A1F3F221B0037F19C /* GoogleService-Info.plist */,
+				1F1BB3281F4F0FE900F456FA /* LoginViewController.swift */,
+				1FB752881F4F5D5600B134D5 /* CadastroViewController.swift */,
 			);
 			path = ConfirmaConsultaIOS;
 			sourceTree = "<group>";
@@ -463,8 +469,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F1BB3291F4F0FE900F456FA /* LoginViewController.swift in Sources */,
 				1F210ADC1F3F21190037F19C /* ViewController.swift in Sources */,
 				1F210AE21F3F21190037F19C /* ConfirmaConsultaIOS.xcdatamodeld in Sources */,
+				1FB752891F4F5D5600B134D5 /* CadastroViewController.swift in Sources */,
 				1F210ADA1F3F21190037F19C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

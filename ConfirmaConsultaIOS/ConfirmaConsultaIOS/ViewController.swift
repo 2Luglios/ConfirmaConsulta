@@ -75,8 +75,7 @@ class ViewController: UIViewController {
         let token = Messaging.messaging().fcmToken
         print("FCM token: \(token ?? "")")
         
-        
-        Messaging.messaging().subscribe(toTopic: "/topics/teste")
+        Messaging.messaging().subscribe(toTopic: "/topic/teste")
         
     }
 

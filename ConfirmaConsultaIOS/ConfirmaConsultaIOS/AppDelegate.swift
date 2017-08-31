@@ -89,10 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Messaging.messaging().apnsToken = deviceToken
     }
     
-    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
 
-        Messaging.messaging().subscribe(toTopic: "/topic/teste")
-    }
 }
 
 // [START ios_10_message_handling]
