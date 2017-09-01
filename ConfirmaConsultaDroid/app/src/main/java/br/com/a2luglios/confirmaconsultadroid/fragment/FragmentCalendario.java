@@ -89,14 +89,14 @@ public class FragmentCalendario extends Fragment {
     }
 
     private ArrayList<Date> getHolidays(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
-        String dateInString = "30-08-2017";
-        Date date = null;
-        try {
-            date = sdf.parse(dateInString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+        //String dateInString = "30-08-2017";
+        Date date = new Date();
+        //try {
+        //    date = sdf.parse(dateInString);
+        //} catch (ParseException e) {
+        //     e.printStackTrace();
+        //}
         ArrayList<Date> holidays = new ArrayList<>();
         holidays.add(date);
         return holidays;

@@ -12,7 +12,7 @@ import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
 
 public class Consulta implements FirebaseRTDBModel{
 
-    private Long id;
+    //private Long id;
     private String hash;
     private String chavemedicoconsultorio;
     private Confirmacao confirmacao;
@@ -24,13 +24,13 @@ public class Consulta implements FirebaseRTDBModel{
     private String consultorio;
     private String idCalendario;
 
-    public Long getId() {
-        return id;
-    }
+    //public Long getId() {
+    //    return id;
+    //}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    //public void setId(Long id) {
+    //    this.id = id;
+    //}
 
     @Override
     public String getHash() {
@@ -116,7 +116,7 @@ public class Consulta implements FirebaseRTDBModel{
 
     public ContentValues getContentValues() {
         ContentValues values = new ContentValues();
-        values.put("id", id);
+        //values.put("id", id);
         values.put("medico", medico);
         values.put("dataInicio", dataInicio);
         values.put("dataTermino", dataTermino);

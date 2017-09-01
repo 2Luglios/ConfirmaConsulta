@@ -48,7 +48,7 @@ public class FirebaseUtilDB {
         }
     }
 
-    public void readRTDB(String raiz, final Class<? extends FirebaseRTDBModel> clazz, final FirebaseRTDBUpdate updateMensagens) {
+    public void readRTDB(final String raiz, final Class<? extends FirebaseRTDBModel> clazz, final FirebaseRTDBUpdate updateMensagens) {
         final DatabaseReference myRef = database.getReference(raiz);
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -58,7 +58,7 @@ public class FirebaseUtilDB {
                 Iterator<DataSnapshot> i = children.iterator();
                 while(i.hasNext()) {
                     DataSnapshot next = i.next();
-
+                    Log.d("Converte", raiz + " : " + next.getValue().toString());
                     FirebaseRTDBModel model = (FirebaseRTDBModel) next.getValue(clazz);
                     model.setHash(next.getKey());
 

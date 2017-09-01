@@ -2,7 +2,8 @@ Add banco de mensagens
 Add banco de consulta
 Alterar Senha
 Cadastrar Calendario
-
+firebase database offline
+login
 
 
 

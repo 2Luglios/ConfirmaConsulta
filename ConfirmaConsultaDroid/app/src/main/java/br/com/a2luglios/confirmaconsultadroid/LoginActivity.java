@@ -22,9 +22,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_layout);
 
-        firebaseUtilAuth = new FirebaseUtilAuth(this);
-        firebaseUtilAuth.logout();
-
         Button btnEntrar = (Button) findViewById(R.id.btnEntrar);
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +63,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
 
         firebaseUtilAuth = new FirebaseUtilAuth(this);
         if ( firebaseUtilAuth.isConnected() ) {
