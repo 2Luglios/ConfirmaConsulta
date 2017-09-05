@@ -8,7 +8,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public interface FirebaseLoginInterface {
 
-    public void toDo(FirebaseUser user);
-    public void erro(String txt);
+    public void onSuccess(FirebaseUser user);
+    public void onError(String txt);
 
 }

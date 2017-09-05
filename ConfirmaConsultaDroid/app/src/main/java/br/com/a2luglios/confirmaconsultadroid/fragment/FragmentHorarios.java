@@ -7,7 +7,6 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +24,18 @@ import com.alamkanak.weekview.WeekViewEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBSaved;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
+import br.com.a2luglios.confirmaconsultadroid.modelo.Confirmacao;
+import br.com.a2luglios.confirmaconsultadroid.modelo.Consulta;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Usuario;
+import br.com.a2luglios.confirmaconsultadroid.util.CalendarioUtil;
+import br.com.a2luglios.confirmaconsultadroid.util.Preferencias;
 
 /**
  * Created by ettoreluglio on 25/08/17.
@@ -164,10 +169,14 @@ public class FragmentHorarios extends Fragment {
         alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                WeekViewEvent event = new WeekViewEvent();
-                event.setName(txtMedico.getText().toString());
-                event.setLocation(txtConsultorio.getText().toString());
-                event.setColor(Color.GREEN);
+                Calendar fim = Calendar.getInstance();
+                fim.set(Calendar.DAY_OF_MONTH, time.get(Calendar.DAY_OF_MONTH));
+                fim.set(Calendar.MONTH, time.get(Calendar.MONTH));
+                fim.set(Calendar.YEAR, time.get(Calendar.YEAR));
+                fim.set(Calendar.HOUR_OF_DAY, dataInicio.getCurrentHour());
+                fim.set(Calendar.MINUTE, 0);
+                fim.set(Calendar.SECOND, 0);
+                fim.add(Calendar.HOUR_OF_DAY, 1);
 
                 Calendar inicio = Calendar.getInstance();
                 inicio.set(Calendar.DAY_OF_MONTH, time.get(Calendar.DAY_OF_MONTH));
@@ -176,24 +185,49 @@ public class FragmentHorarios extends Fragment {
                 inicio.set(Calendar.HOUR_OF_DAY, dataInicio.getCurrentHour());
                 inicio.set(Calendar.MINUTE, 0);
                 inicio.set(Calendar.SECOND, 0);
-                event.setStartTime(inicio);
 
-                Calendar fim = Calendar.getInstance();
-                fim.set(Calendar.DAY_OF_MONTH, time.get(Calendar.DAY_OF_MONTH));
-                fim.set(Calendar.MONTH, time.get(Calendar.MONTH));
-                fim.set(Calendar.YEAR, time.get(Calendar.YEAR));
-                fim.set(Calendar.HOUR_OF_DAY, dataInicio.getCurrentHour()+1);
-                fim.set(Calendar.MINUTE, 0);
-                fim.set(Calendar.SECOND, 0);
-                event.setEndTime(fim);
+                Usuario usuario = new Preferencias(getContext()).getUsuario();
 
-                events.add(event);
+                Consulta consulta = new Consulta();
+                consulta.setHashUsuario(usuario.getHash());
+                consulta.setMedico(txtMedico.getText().toString());
+                consulta.setConsultorio(txtConsultorio.getText().toString());
+                consulta.setAlarme(Integer.parseInt(spinnerAlarme.getSelectedItem().toString()));
+                consulta.setConfirmacao(Confirmacao.Solicitado);
+                consulta.setDataInicio(inicio.getTimeInMillis());
+                consulta.setDataTermino(fim.getTimeInMillis());
+                consulta.setProcedimento(spinnerProcedimento.getSelectedItem().toString());
 
-                mWeekView.notifyDatasetChanged();
+                new CalendarioUtil(getContext()).addEvento(consulta);
+
+                publicaConsultaNoBanco(consulta);
             }
         });
         alerta.setNegativeButton("Não", null);
         alerta.show();
+    }
+
+    private void publicaConsultaNoBanco(final Consulta consulta) {
+        new FirebaseUtilDB().saveOrUpdate("consultas", consulta, new FirebaseRTDBSaved() {
+            @Override
+            public void saved() {
+                WeekViewEvent event = new WeekViewEvent();
+                event.setName(consulta.getMedico());
+                event.setLocation(consulta.getConsultorio());
+                event.setColor(Color.GREEN);
+
+                Calendar inicio = new GregorianCalendar();
+                inicio.setTimeInMillis(consulta.getDataInicio());
+                event.setStartTime(inicio);
+
+                Calendar fim = new GregorianCalendar();
+                fim.setTimeInMillis(consulta.getDataTermino());
+                event.setEndTime(fim);
+
+                events.add(event);
+                mWeekView.notifyDatasetChanged();
+            }
+        });
     }
 
 }

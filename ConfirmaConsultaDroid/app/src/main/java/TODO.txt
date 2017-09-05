@@ -1,16 +1,6 @@
-Add banco de mensagens
-Add banco de consulta
-Alterar Senha
-Cadastrar Calendario
-firebase database offline
-login
-
-
-
-
-
-
-
+Fazer o delete da consulta
+Popular horarios e calendario com os dados do Banco
+Fazer os filtros para o usuario
 
 
 Possibilidade de adiantar as consultas

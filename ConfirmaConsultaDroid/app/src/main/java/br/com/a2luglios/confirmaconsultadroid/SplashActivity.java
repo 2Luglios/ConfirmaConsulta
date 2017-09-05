@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -16,6 +18,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_layout);
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         new Thread(new Runnable() {
             @Override

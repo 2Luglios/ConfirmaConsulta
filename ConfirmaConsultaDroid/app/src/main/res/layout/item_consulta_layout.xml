@@ -43,7 +43,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.9"
+            android:layout_weight="0.8"
             android:orientation="vertical">
 
             <TextView
@@ -71,9 +71,18 @@
             android:id="@+id/imgConfirmacao"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center_vertical|center_horizontal"
             android:layout_weight="0.1"
             app:srcCompat="@mipmap/ic_launcher_round" />
+
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_weight="0.1"
+            android:background="#ffffffff"
+            app:srcCompat="@drawable/lixeira" />
 
     </LinearLayout>
 

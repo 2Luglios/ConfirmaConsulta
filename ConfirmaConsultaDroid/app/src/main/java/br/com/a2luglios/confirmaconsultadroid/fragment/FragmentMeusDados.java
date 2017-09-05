@@ -227,20 +227,23 @@ public class FragmentMeusDados extends Fragment {
                 String senha = campoSenha.getEditableText().toString();
                 String repitaSenha = campoRepitaSenha.getEditableText().toString();
                 String email = campoEmail.getEditableText().toString();
-                if (senha.isEmpty()) {
+                if (usuario.getHash() != null) {
                     salvarUsuario();
+                    if ( senha != null && senha.equals(repitaSenha) && senha.length() > 0) {
+                        new FirebaseUtilAuth(getActivity()).alteraSenha(senha);
+                    }
                 } else {
                     if (senha.equals(repitaSenha)) {
                         new FirebaseUtilAuth(getActivity()).criarUsuario(email, senha,
                                 new FirebaseLoginInterface() {
                                     @Override
-                                    public void toDo(FirebaseUser user) {
+                                    public void onSuccess(FirebaseUser user) {
                                         salvarUsuario();
                                         getActivity().finish();
                                     }
 
                                     @Override
-                                    public void erro(String txt) {
+                                    public void onError(String txt) {
                                         Toast.makeText(getContext(), txt, Toast.LENGTH_SHORT).show();
                                     }
                                 });

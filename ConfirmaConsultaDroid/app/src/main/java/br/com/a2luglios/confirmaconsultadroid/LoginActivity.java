@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
                         senha.getEditableText().toString(),
                         new FirebaseLoginInterface() {
                             @Override
-                            public void toDo(FirebaseUser user) {
+                            public void onSuccess(FirebaseUser user) {
                                 if ( firebaseUtilAuth.isConnected() ) {
                                     Intent logado = new Intent(LoginActivity.this,
                                             PrincipalActivity.class);
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void erro(String txt) {
+                            public void onError(String txt) {
                                 showSnack("Impossivel conectar...");
                             }
                         });

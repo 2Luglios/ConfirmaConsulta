@@ -93,4 +93,10 @@ public class FirebaseUtilDB {
             }
         });
     }
+
+    public void deleteRTDB(String raiz, final FirebaseRTDBSaved firebaseRTDBSaved) {
+        final DatabaseReference myRef = database.getReference(raiz);
+        myRef.removeValue();
+        firebaseRTDBSaved.saved();
+    }
 }
