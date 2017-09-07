@@ -1,4 +1,4 @@
-package br.com.a2luglios.confirmaconsultadroid.dao;
+package br.com.a2luglios.confirmaconsultadroid.util;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

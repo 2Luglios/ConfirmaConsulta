@@ -60,9 +60,8 @@ public class CalendarioUtil {
         ctx.getContentResolver().insert(CalendarContract.Reminders.CONTENT_URI, reminders);
     }
 
-    public void removeEvento(Consulta consulta) {
-        Uri eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI,
-                Long.parseLong(consulta.getIdCalendario()));
+    public void removeEvento(long id) {
+        Uri eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, id);
         ctx.getContentResolver().delete(eventUri, null, null);
     }
 

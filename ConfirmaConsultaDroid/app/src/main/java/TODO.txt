@@ -1,6 +1,15 @@
-Fazer o delete da consulta
-Popular horarios e calendario com os dados do Banco
+mostrar propagandas e mensagens
+Fazer as buscas certas na tela de buscar
+interceptar mensagens e mostrar num alerta por exemplo
 Fazer os filtros para o usuario
+
+
+
+
+
+
+
+
 
 
 Possibilidade de adiantar as consultas

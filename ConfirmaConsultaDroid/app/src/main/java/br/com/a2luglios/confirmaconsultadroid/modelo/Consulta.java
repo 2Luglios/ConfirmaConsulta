@@ -12,7 +12,6 @@ import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
 
 public class Consulta implements FirebaseRTDBModel{
 
-    //private Long id;
     private String hashUsuario;
     private String hash;
     private String chavemedicoconsultorio;
@@ -24,15 +23,10 @@ public class Consulta implements FirebaseRTDBModel{
     private String medico;
     private String consultorio;
     private String idCalendario;
-
-    //public Long getId() {
-    //    return id;
-    //}
-
-    //public void setId(Long id) {
-    //    this.id = id;
-    //}
-
+    private long dataMarcada;
+    private long dataSolicitado;
+    private long dataConfirmado;
+    private long dataCancelado;
 
     public String getHashUsuario() {
         return hashUsuario;
@@ -124,4 +118,35 @@ public class Consulta implements FirebaseRTDBModel{
         this.idCalendario = idCalendario;
     }
 
+    public long getDataMarcada() {
+        return dataMarcada;
+    }
+
+    public void setDataMarcada(long dataMarcada) {
+        this.dataMarcada = dataMarcada;
+    }
+
+    public long getDataSolicitado() {
+        return dataSolicitado;
+    }
+
+    public void setDataSolicitado(long dataSolicitado) {
+        this.dataSolicitado = dataSolicitado;
+    }
+
+    public long getDataConfirmado() {
+        return dataConfirmado;
+    }
+
+    public void setDataConfirmado(long dataConfirmado) {
+        this.dataConfirmado = dataConfirmado;
+    }
+
+    public long getDataCancelado() {
+        return dataCancelado;
+    }
+
+    public void setDataCancelado(long dataCancelado) {
+        this.dataCancelado = dataCancelado;
+    }
 }

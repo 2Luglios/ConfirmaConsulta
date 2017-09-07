@@ -7,6 +7,7 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -28,8 +31,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
+import br.com.a2luglios.confirmaconsultadroid.adapter.SpinnerGenericoAdapter;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBSaved;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdateConsulta;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Confirmacao;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Consulta;
@@ -46,7 +51,12 @@ public class FragmentHorarios extends Fragment {
     private List<String> listaProcedimentos;
     private List<String> horariosAlarme;
     private List<WeekViewEvent> events = new ArrayList<>();
+
     private WeekView mWeekView;
+
+    public List<Consulta> consultas;
+
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
     @Nullable
     @Override
@@ -59,6 +69,31 @@ public class FragmentHorarios extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_horarios, null);
         mWeekView = (WeekView) v.findViewById(R.id.weekView);
+
+        new FirebaseUtilDB().readRTDBConsultas("consultas", new FirebaseRTDBUpdateConsulta() {
+            @Override
+            public void updateConsultas(List<Consulta> consultas) {
+                FragmentHorarios.this.consultas = consultas;
+                for (Consulta consulta: consultas) {
+                    WeekViewEvent event = new WeekViewEvent();
+                    event.setName(consulta.getMedico());
+                    event.setLocation(consulta.getConsultorio());
+                    event.setColor(Color.GREEN);
+                    event.setId(Long.parseLong(consulta.getIdCalendario()));
+
+                    Calendar inicio = new GregorianCalendar();
+                    inicio.setTimeInMillis(consulta.getDataInicio());
+                    event.setStartTime(inicio);
+
+                    Calendar fim = new GregorianCalendar();
+                    fim.setTimeInMillis(consulta.getDataTermino());
+                    event.setEndTime(fim);
+
+                    events.add(event);
+                }
+                mWeekView.notifyDatasetChanged();
+            }
+        });
 
         mWeekView.setOnEventClickListener(new WeekView.EventClickListener() {
             @Override
@@ -83,8 +118,15 @@ public class FragmentHorarios extends Fragment {
                 alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        events.remove(event);
-                        mWeekView.notifyDatasetChanged();
+                        new FirebaseUtilDB().deleteRTDB("consultas/" + consultas.get(0).getHash(), new FirebaseRTDBSaved() {
+                            @Override
+                            public void saved() {
+                                events.remove(event);
+                                new CalendarioUtil(getContext())
+                                        .removeEvento(Long.parseLong(consultas.get(0).getIdCalendario()));
+                                mWeekView.notifyDatasetChanged();
+                            }
+                        });
                     }
                 });
                 alerta.setNegativeButton("Não", null);
@@ -103,12 +145,12 @@ public class FragmentHorarios extends Fragment {
 
         mWeekView.setHorizontalFlingEnabled(false);
 
-        mWeekView.setScrollListener(new WeekView.ScrollListener() {
-            @Override
-            public void onFirstVisibleDayChanged(Calendar newFirstVisibleDay, Calendar oldFirstVisibleDay) {
-                mWeekView.goToDate(c);
-            }
-        });
+//        mWeekView.setScrollListener(new WeekView.ScrollListener() {
+//            @Override
+//            public void onFirstVisibleDayChanged(Calendar newFirstVisibleDay, Calendar oldFirstVisibleDay) {
+//                mWeekView.goToDate(c);
+//            }
+//        });
 
         return v;
     }
@@ -156,12 +198,11 @@ public class FragmentHorarios extends Fragment {
         });
 
         final Spinner spinnerProcedimento = (Spinner)v.findViewById(R.id.spinnerProcedimento);
-        spinnerProcedimento.setAdapter(new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_list_item_1, listaProcedimentos));
+        spinnerProcedimento.setAdapter(new SpinnerGenericoAdapter(getContext(), listaProcedimentos));
 
         final Spinner spinnerAlarme = (Spinner)v.findViewById(R.id.spinnerAlarme);
-        spinnerAlarme.setAdapter(new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_list_item_1, horariosAlarme));
+        spinnerAlarme.setAdapter(new SpinnerGenericoAdapter(getContext(), horariosAlarme));
+
 
         AlertDialog.Builder alerta = new AlertDialog.Builder(getContext());
         alerta.setTitle("Adicionando evento...");

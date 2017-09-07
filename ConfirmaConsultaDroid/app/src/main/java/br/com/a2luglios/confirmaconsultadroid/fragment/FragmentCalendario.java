@@ -9,23 +9,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import com.squareup.timessquare.CalendarCellDecorator;
 import com.squareup.timessquare.CalendarCellView;
 import com.squareup.timessquare.CalendarPickerView;
-import com.squareup.timessquare.DefaultDayViewAdapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
+import br.com.a2luglios.confirmaconsultadroid.modelo.Consulta;
+import br.com.a2luglios.confirmaconsultadroid.modelo.Consultorio;
+import br.com.a2luglios.confirmaconsultadroid.modelo.Usuario;
 
 /**
  * Created by ettoreluglio on 25/08/17.
@@ -33,20 +36,20 @@ import br.com.a2luglios.confirmaconsultadroid.R;
 
 public class FragmentCalendario extends Fragment {
 
+    private Consultorio consultorio;
+    private Usuario medico;
+    private String especialidade;
+
+    private CalendarPickerView calendar;
+    private List<CalendarCellDecorator> decorators = new ArrayList<>();
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_calendario, null);
 
-        Calendar nextYear = Calendar.getInstance();
-        nextYear.add(Calendar.MONTH, 3);
-
-        CalendarPickerView calendar = (CalendarPickerView) v.findViewById(R.id.calendar_view);
-        Date today = new Date();
-        calendar.init(today, nextYear.getTime()).withSelectedDate(today);
-        //calendar.setCustomDayView(new DefaultDayViewAdapter());
-
-        List<CalendarCellDecorator> decorators = new ArrayList<>();
+        calendar = (CalendarPickerView) v.findViewById(R.id.calendar_view);
         decorators.add(new CalendarCellDecorator() {
             @Override
             public void decorate(CalendarCellView cellView, Date date) {
@@ -58,23 +61,49 @@ public class FragmentCalendario extends Fragment {
                 } else {
                     cellView.getDayOfMonthTextView().setBackgroundColor(0xFF00FF00);
                 }
-
             }
         });
         calendar.setDecorators(decorators);
 
+        new FirebaseUtilDB().readRTDB("consultas", Consulta.class, new FirebaseRTDBUpdate() {
+            @Override
+            public void updateMensagem(Object obj) {
+                Consulta consulta = (Consulta) obj;
+                final Calendar c = Calendar.getInstance();
+                c.setTimeInMillis(consulta.getDataInicio());
+                decorators.add(new CalendarCellDecorator(){
+                    @Override
+                    public void decorate(CalendarCellView cellView, Date date) {
+                        Calendar data = Calendar.getInstance();
+                        data.setTime(date);
+
+                        if ( c.get(Calendar.DAY_OF_MONTH) == data.get(Calendar.DAY_OF_MONTH) &&
+                                c.get(Calendar.MONTH) == data.get(Calendar.MONTH) &&
+                                c.get(Calendar.YEAR) == data.get(Calendar.YEAR) ) {
+                            cellView.getDayOfMonthTextView().setBackgroundColor(0xCECECE);
+                        }
+                    }
+                });
+
+                calendar.setDecorators(decorators);
+            }
+        });
+
+        Calendar nextYear = Calendar.getInstance();
+        nextYear.add(Calendar.MONTH, 3);
+
+        calendar.init(new Date(), nextYear.getTime());
+
         calendar.setCellClickInterceptor(new CalendarPickerView.CellClickInterceptor() {
             @Override
             public boolean onCellClicked(Date date) {
-                FragmentManager manager = getFragmentManager();
-
                 FragmentHorarios horarios = new FragmentHorarios();
 
                 Bundle argumentos = new Bundle();
                 argumentos.putLong("data", date.getTime());
                 horarios.setArguments(argumentos);
 
-                FragmentTransaction transaction = manager.beginTransaction();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_place, horarios);
                 transaction.addToBackStack(null);
                 transaction.commit();
@@ -83,25 +112,20 @@ public class FragmentCalendario extends Fragment {
             }
         });
 
-        calendar.highlightDates(getHolidays());
-
         return v;
     }
 
-    private ArrayList<Date> getHolidays(){
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
-        //String dateInString = "30-08-2017";
-        Date date = new Date();
-        //try {
-        //    date = sdf.parse(dateInString);
-        //} catch (ParseException e) {
-        //     e.printStackTrace();
-        //}
-        ArrayList<Date> holidays = new ArrayList<>();
-        holidays.add(date);
-        return holidays;
+    public void setConsultorio(Consultorio consultorio) {
+        this.consultorio = consultorio;
     }
 
+    public void setMedico(Usuario medico) {
+        this.medico = medico;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
 
     public void datas () {
         SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yy");

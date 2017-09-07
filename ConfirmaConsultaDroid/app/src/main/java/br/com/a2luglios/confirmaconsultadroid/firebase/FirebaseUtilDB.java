@@ -9,6 +9,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -64,6 +65,33 @@ public class FirebaseUtilDB {
 
                     updateMensagens.updateMensagem(model);
                 }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.d("FirebaseDatabase", "Erro ao ler ", error.toException());
+            }
+        });
+    }
+
+    public void readRTDBConsultas(final String raiz, final FirebaseRTDBUpdateConsulta update){
+        final DatabaseReference myRef = database.getReference(raiz);
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Consulta> consultas = new ArrayList<Consulta>();
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                Iterator<DataSnapshot> i = children.iterator();
+                while(i.hasNext()) {
+                    DataSnapshot next = i.next();
+                    Consulta model = (Consulta) next.getValue(Consulta.class);
+                    model.setHash(next.getKey());
+
+                    consultas.add(model);
+                }
+                update.updateConsultas(consultas);
             }
 
             @Override
