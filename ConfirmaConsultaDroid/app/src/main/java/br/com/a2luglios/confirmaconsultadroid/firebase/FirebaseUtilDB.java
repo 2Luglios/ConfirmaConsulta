@@ -74,7 +74,7 @@ public class FirebaseUtilDB {
         });
     }
 
-    public void readRTDBConsultas(final String raiz, final FirebaseRTDBUpdateConsulta update){
+    public void readRTDBConsultas(final String raiz, final FirebaseRTDBUpdateLista<Consulta> listaUpdate){
         final DatabaseReference myRef = database.getReference(raiz);
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -87,16 +87,42 @@ public class FirebaseUtilDB {
                 while(i.hasNext()) {
                     DataSnapshot next = i.next();
                     Consulta model = (Consulta) next.getValue(Consulta.class);
-                    model.setHash(next.getKey());
 
                     consultas.add(model);
                 }
-                update.updateConsultas(consultas);
+                listaUpdate.updateConsultas(consultas);
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 Log.d("FirebaseDatabase", "Erro ao ler ", error.toException());
+            }
+        });
+    }
+
+    public void readRTDBMensagens(final String raiz, final FirebaseRTDBUpdateLista<Mensagem> listaUpdate){
+        final DatabaseReference myRef = database.getReference(raiz);
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Mensagem> consultas = new ArrayList<Mensagem>();
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                Iterator<DataSnapshot> i = children.iterator();
+                while(i.hasNext()) {
+                    DataSnapshot next = i.next();
+                    Mensagem model = (Mensagem) next.getValue(Mensagem.class);
+                    model.setHash(next.getKey());
+
+                    consultas.add(model);
+                }
+                listaUpdate.updateConsultas(consultas);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
@@ -127,4 +153,29 @@ public class FirebaseUtilDB {
         myRef.removeValue();
         firebaseRTDBSaved.saved();
     }
+
+    public interface FirebaseRTDBUpdate {
+        public void updateMensagem(Object obj);
+    }
+
+    public interface FirebaseRTDBUpdateLista<T> {
+        public void updateConsultas(List<T> lista);
+    }
+
+    public interface FirebaseRTDBSaved {
+        public void saved();
+    }
+
+    public interface FirebaseRTDBInterface {}
+
+    public interface FirebaseRTDBToken extends FirebaseRTDBInterface {
+        public void setToken(String token);
+        public String getToken();
+    }
+
+    public interface FirebaseRTDBModel extends FirebaseRTDBInterface {
+        public void setHash(String hash);
+        public String getHash();
+    }
+
 }

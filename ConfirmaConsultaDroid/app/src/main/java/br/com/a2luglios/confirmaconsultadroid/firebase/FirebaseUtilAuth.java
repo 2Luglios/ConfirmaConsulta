@@ -76,4 +76,11 @@ public class FirebaseUtilAuth {
                     }
                 });
     }
+
+    public interface FirebaseLoginInterface {
+
+        public void onSuccess(FirebaseUser user);
+        public void onError(String txt);
+
+    }
 }

@@ -23,7 +23,6 @@ import java.util.List;
 import br.com.a2luglios.confirmaconsultadroid.R;
 import br.com.a2luglios.confirmaconsultadroid.adapter.ConsultaAdapter;
 
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Consulta;
 
@@ -76,7 +75,7 @@ public class FragmentAgenda extends Fragment {
     private void carregaLista() {
         consultas = new ArrayList<>();
         final ListView listConsultas = (ListView) agenda.findViewById(R.id.listConsultas);
-        new FirebaseUtilDB().readRTDB("consultas", Consulta.class, new FirebaseRTDBUpdate() {
+        new FirebaseUtilDB().readRTDB("consultas", Consulta.class, new FirebaseUtilDB.FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
                 Consulta consulta = (Consulta) obj;

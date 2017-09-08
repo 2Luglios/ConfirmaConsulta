@@ -15,8 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBSaved;
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Consulta;
 
@@ -73,7 +71,7 @@ public class ConsultaAdapter extends BaseAdapter {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new FirebaseUtilDB().deleteRTDB("/consultas/" + consultas.get(i).getHash(), new FirebaseRTDBSaved() {
+                new FirebaseUtilDB().deleteRTDB("/consultas/" + consultas.get(i).getHash(), new FirebaseUtilDB.FirebaseRTDBSaved() {
                     @Override
                     public void saved() {
                         listener.update();

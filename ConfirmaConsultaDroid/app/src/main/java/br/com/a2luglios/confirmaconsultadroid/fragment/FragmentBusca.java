@@ -20,7 +20,6 @@ import java.util.List;
 import br.com.a2luglios.confirmaconsultadroid.R;
 import br.com.a2luglios.confirmaconsultadroid.adapter.ConsultaAdapter;
 import br.com.a2luglios.confirmaconsultadroid.adapter.SpinnerGenericoAdapter;
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Consultorio;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Usuario;
@@ -131,7 +130,7 @@ public class FragmentBusca extends Fragment {
 
     private void buscarConsultorios() {
         listaConsultorios = new ArrayList<>();
-        new FirebaseUtilDB().readRTDB("consultorios", Consultorio.class, new FirebaseRTDBUpdate() {
+        new FirebaseUtilDB().readRTDB("consultorios", Consultorio.class, new FirebaseUtilDB.FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
                 listaConsultorios.add((Consultorio) obj);
@@ -144,7 +143,7 @@ public class FragmentBusca extends Fragment {
 
     private void buscarMedicos() {
         listaMedicos = new ArrayList<>();
-        new FirebaseUtilDB().readRTDB("usuarios", Usuario.class, new FirebaseRTDBUpdate() {
+        new FirebaseUtilDB().readRTDB("usuarios", Usuario.class, new FirebaseUtilDB.FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
                 listaMedicos.add((Usuario)obj);
@@ -157,7 +156,7 @@ public class FragmentBusca extends Fragment {
 
     private void buscarEspecialidades() {
         listaEspecialidades = new ArrayList<>();
-        new FirebaseUtilDB().readRTDBPlain("especialidades", new FirebaseRTDBUpdate() {
+        new FirebaseUtilDB().readRTDBPlain("especialidades", new FirebaseUtilDB.FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
                 listaEspecialidades.add(obj.toString());

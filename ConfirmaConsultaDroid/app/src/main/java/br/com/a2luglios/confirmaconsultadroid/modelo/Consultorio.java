@@ -1,18 +1,14 @@
 package br.com.a2luglios.confirmaconsultadroid.modelo;
 
-import android.content.ContentValues;
-
-import java.util.List;
 import java.util.Map;
 
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBToken;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 
 /**
  * Created by ettoreluglio on 20/06/17.
  */
 
-public class Consultorio implements FirebaseRTDBModel, FirebaseRTDBToken {
+public class Consultorio implements FirebaseUtilDB.FirebaseRTDBModel, FirebaseUtilDB.FirebaseRTDBToken {
 
     private Long id;
     private String hash;

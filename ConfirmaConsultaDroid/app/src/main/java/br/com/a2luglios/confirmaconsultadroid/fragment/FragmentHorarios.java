@@ -7,11 +7,9 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,7 +20,6 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,9 +29,6 @@ import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
 import br.com.a2luglios.confirmaconsultadroid.adapter.SpinnerGenericoAdapter;
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBSaved;
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdateConsulta;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Confirmacao;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Consulta;
@@ -70,7 +64,7 @@ public class FragmentHorarios extends Fragment {
         View v = inflater.inflate(R.layout.fragment_horarios, null);
         mWeekView = (WeekView) v.findViewById(R.id.weekView);
 
-        new FirebaseUtilDB().readRTDBConsultas("consultas", new FirebaseRTDBUpdateConsulta() {
+        new FirebaseUtilDB().readRTDBConsultas("consultas", new FirebaseUtilDB.FirebaseRTDBUpdateLista<Consulta>() {
             @Override
             public void updateConsultas(List<Consulta> consultas) {
                 FragmentHorarios.this.consultas = consultas;
@@ -118,7 +112,7 @@ public class FragmentHorarios extends Fragment {
                 alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        new FirebaseUtilDB().deleteRTDB("consultas/" + consultas.get(0).getHash(), new FirebaseRTDBSaved() {
+                        new FirebaseUtilDB().deleteRTDB("consultas/" + consultas.get(0).getHash(), new FirebaseUtilDB.FirebaseRTDBSaved() {
                             @Override
                             public void saved() {
                                 events.remove(event);
@@ -160,7 +154,7 @@ public class FragmentHorarios extends Fragment {
         super.onStart();
 
         listaProcedimentos = new ArrayList<>();
-        new FirebaseUtilDB().readRTDBPlain("procedimentos", new FirebaseRTDBUpdate() {
+        new FirebaseUtilDB().readRTDBPlain("procedimentos", new FirebaseUtilDB.FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
                 listaProcedimentos.add(obj.toString());
@@ -249,7 +243,7 @@ public class FragmentHorarios extends Fragment {
     }
 
     private void publicaConsultaNoBanco(final Consulta consulta) {
-        new FirebaseUtilDB().saveOrUpdate("consultas", consulta, new FirebaseRTDBSaved() {
+        new FirebaseUtilDB().saveOrUpdate("consultas", consulta, new FirebaseUtilDB.FirebaseRTDBSaved() {
             @Override
             public void saved() {
                 WeekViewEvent event = new WeekViewEvent();

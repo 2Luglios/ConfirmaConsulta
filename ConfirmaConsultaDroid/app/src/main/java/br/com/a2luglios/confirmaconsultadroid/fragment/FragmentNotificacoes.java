@@ -1,5 +1,6 @@
 package br.com.a2luglios.confirmaconsultadroid.fragment;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,11 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import java.util.Arrays;
+import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilStorage;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
+import br.com.a2luglios.confirmaconsultadroid.modelo.Mensagem;
 
 /**
  * Created by ettoreluglio on 14/08/17.
@@ -21,30 +27,19 @@ import br.com.a2luglios.confirmaconsultadroid.R;
 
 public class FragmentNotificacoes extends Fragment {
 
+    private ListView listNotificacoes;
+    private List<Mensagem> lista;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View agenda = inflater.inflate(R.layout.fragment_notificacoes,
-                        container, false);
+        View agenda = inflater.inflate(R.layout.fragment_notificacoes, container, false);
 
-        ListView listNotificacoes = (ListView) agenda.findViewById(R.id.listNotificacoes);
-        listNotificacoes.setAdapter(new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_list_item_1, Arrays.asList("", "", "", "", "", "")) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View v1 = LayoutInflater.from(getContext()).inflate(R.layout.item_mensagem_layout, null);
-                View v2 = LayoutInflater.from(getContext()).inflate(R.layout.item_propaganda_layout, null);
+        listNotificacoes = (ListView) agenda.findViewById(R.id.listNotificacoes);
 
-                if ( position % 2 == 1 ) {
-                    return v1;
-                } else {
-                    return v2;
-                }
-            }
-        });
+        carregaTudao();
 
         listNotificacoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,5 +57,47 @@ public class FragmentNotificacoes extends Fragment {
 
 
         return agenda;
+    }
+
+    public void carregaTudao() {
+        new FirebaseUtilDB().readRTDBMensagens("mensagens", new FirebaseUtilDB.FirebaseRTDBUpdateLista<Mensagem>() {
+            @Override
+            public void updateConsultas(final List<Mensagem> lista) {
+                FragmentNotificacoes.this.lista = lista;
+
+                listNotificacoes.setAdapter(new ArrayAdapter<Mensagem>(getContext(),
+                        android.R.layout.simple_list_item_1, lista) {
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        if ( lista.get(position).getTipo().equals("propaganda") ) {
+                            final View v2 = LayoutInflater.from(getContext()).inflate(R.layout.item_propaganda_layout, null);
+                            new FirebaseUtilStorage().getImage(lista.get(position).getImagem(), new FirebaseUtilStorage.FirebaseStorageImage() {
+                                @Override
+                                public void updateImage(Bitmap bitmap) {
+                                    ImageView image = (ImageView) v2.findViewById(R.id.imgPropaganda);
+                                    image.setImageBitmap(bitmap);
+                                }
+                            });
+                            TextView text = (TextView) v2.findViewById(R.id.txtPropaganda);
+                            text.setText(lista.get(position).getMensagem());
+                            return v2;
+                        } else {
+                            final View v1 = LayoutInflater.from(getContext()).inflate(R.layout.item_mensagem_layout, null);
+                            new FirebaseUtilStorage().getImage(lista.get(position).getImagem(), new FirebaseUtilStorage.FirebaseStorageImage() {
+                                @Override
+                                public void updateImage(Bitmap bitmap) {
+                                    ImageView image = (ImageView) v1.findViewById(R.id.imgMensagem);
+                                    image.setImageBitmap(bitmap);
+                                }
+                            });
+                            TextView text = (TextView) v1.findViewById(R.id.txtMensagem);
+                            text.setText(lista.get(position).getMensagem());
+                            return v1;
+                        }
+                    }
+                });
+            }
+        });
     }
 }

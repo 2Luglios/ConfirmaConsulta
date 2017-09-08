@@ -4,13 +4,13 @@ import android.content.ContentValues;
 
 import java.util.Calendar;
 
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 
 /**
  * Created by ettoreluglio on 19/06/17.
  */
 
-public class Consulta implements FirebaseRTDBModel{
+public class Consulta implements FirebaseUtilDB.FirebaseRTDBModel{
 
     private String hashUsuario;
     private String hash;
