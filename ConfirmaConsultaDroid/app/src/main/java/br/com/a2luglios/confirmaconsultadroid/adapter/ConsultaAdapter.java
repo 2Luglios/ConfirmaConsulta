@@ -5,14 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBSaved;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Consulta;
 
 /**
@@ -25,6 +30,7 @@ public class ConsultaAdapter extends BaseAdapter {
     private List<Consulta> consultas;
     private SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat sdfHora = new SimpleDateFormat("hh:mm");
+    private ConsultaAdapter.Update listener;
 
     public ConsultaAdapter(Context ctx, List<Consulta> consultas) {
         this.ctx = ctx;
@@ -47,7 +53,7 @@ public class ConsultaAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         View v = LayoutInflater.from(ctx).inflate(R.layout.item_consulta_layout, null);
 
         Date data = new Date();
@@ -63,6 +69,29 @@ public class ConsultaAdapter extends BaseAdapter {
         txtClinica.setText(consultas.get(i).getConsultorio());
         ImageView imgConfirmacao = (ImageView) v.findViewById(R.id.imgConfirmacao);
 
+        ImageButton btnDelete = (ImageButton) v.findViewById(R.id.btnDelete);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FirebaseUtilDB().deleteRTDB("/consultas/" + consultas.get(i).getHash(), new FirebaseRTDBSaved() {
+                    @Override
+                    public void saved() {
+                        listener.update();
+                    }
+                });
+            }
+        });
+
         return v;
     }
+
+    public void setListener(ConsultaAdapter.Update listener) {
+        this.listener = listener;
+    }
+
+    public interface Update {
+        public void update();
+    }
 }
+
+

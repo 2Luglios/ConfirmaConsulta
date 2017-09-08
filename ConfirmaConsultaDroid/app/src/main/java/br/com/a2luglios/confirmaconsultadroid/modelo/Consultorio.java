@@ -20,6 +20,7 @@ public class Consultorio implements FirebaseRTDBModel, FirebaseRTDBToken {
     private String nome;
     private Map<String, Object> contato;
     private Map<String, Object> endereco;
+    private String obs;
 
     public Long getId() {
         return id;
@@ -71,5 +72,13 @@ public class Consultorio implements FirebaseRTDBModel, FirebaseRTDBToken {
 
     public void setEndereco(Map<String, Object> endereco) {
         this.endereco = endereco;
+    }
+
+    public String getObs() {
+        return obs;
+    }
+
+    public void setObs(String obs) {
+        this.obs = obs;
     }
 }

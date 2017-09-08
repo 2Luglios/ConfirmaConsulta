@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Confirma Consulta</title>
+  </head>
+  <body>
+    <h1>Backup Feito!</h1>
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script src="dateformat.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDmR3P5F8b7KD2omh4RrUfBSNL4cvsEuBU",
+        authDomain: "confirmaconsulta-63f26.firebaseapp.com",
+        databaseURL: "https://confirmaconsulta-63f26.firebaseio.com",
+        projectId: "confirmaconsulta-63f26",
+        storageBucket: "confirmaconsulta-63f26.appspot.com",
+        messagingSenderId: "42148264085"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+      var storage = firebase.storage();
+      var storageRef = storage.ref();
+
+      var now = new Date();
+      var formatDate = dateFormat(now, "yyyymmdd-HHMMss");
+
+      var backupRef = storageRef.child('backupDB/' + formatDate + '.json');
+
+      firebase.database().ref().once('value')
+                            .then(function(snapshot) {
+        var db = JSON.stringify(snapshot.val());
+        console.log(db);
+        backupRef.putString(db);
+      });
+    </script>
+  </body>
+</html>

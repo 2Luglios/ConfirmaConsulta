@@ -12,7 +12,7 @@ import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
 
 public class Consulta implements FirebaseRTDBModel{
 
-    private Long id;
+    private String hashUsuario;
     private String hash;
     private String chavemedicoconsultorio;
     private Confirmacao confirmacao;
@@ -23,13 +23,17 @@ public class Consulta implements FirebaseRTDBModel{
     private String medico;
     private String consultorio;
     private String idCalendario;
+    private long dataMarcada;
+    private long dataSolicitado;
+    private long dataConfirmado;
+    private long dataCancelado;
 
-    public Long getId() {
-        return id;
+    public String getHashUsuario() {
+        return hashUsuario;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setHashUsuario(String hashUsuario) {
+        this.hashUsuario = hashUsuario;
     }
 
     @Override
@@ -114,16 +118,35 @@ public class Consulta implements FirebaseRTDBModel{
         this.idCalendario = idCalendario;
     }
 
-    public ContentValues getContentValues() {
-        ContentValues values = new ContentValues();
-        values.put("id", id);
-        values.put("medico", medico);
-        values.put("dataInicio", dataInicio);
-        values.put("dataTermino", dataTermino);
-        values.put("confirmacao", confirmacao.name());
-        values.put("alarme", alarme);
-        values.put("consultorio", consultorio);
-        return values;
+    public long getDataMarcada() {
+        return dataMarcada;
     }
 
+    public void setDataMarcada(long dataMarcada) {
+        this.dataMarcada = dataMarcada;
+    }
+
+    public long getDataSolicitado() {
+        return dataSolicitado;
+    }
+
+    public void setDataSolicitado(long dataSolicitado) {
+        this.dataSolicitado = dataSolicitado;
+    }
+
+    public long getDataConfirmado() {
+        return dataConfirmado;
+    }
+
+    public void setDataConfirmado(long dataConfirmado) {
+        this.dataConfirmado = dataConfirmado;
+    }
+
+    public long getDataCancelado() {
+        return dataCancelado;
+    }
+
+    public void setDataCancelado(long dataCancelado) {
+        this.dataCancelado = dataCancelado;
+    }
 }

@@ -34,33 +34,24 @@ import br.com.a2luglios.confirmaconsultadroid.modelo.Consulta;
 public class FragmentAgenda extends Fragment {
 
     private List<Consulta> consultas;
+    private View agenda;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View agenda =
+        agenda =
                 inflater.inflate(R.layout.fragment_agenda,
                         container, false);
 
         final ListView listConsultas = (ListView) agenda.findViewById(R.id.listConsultas);
-        carregaLista(listConsultas);
+        carregaLista();
 
         listConsultas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getContext(), "Ir para detalher", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        registerForContextMenu(listConsultas);
-
-        listConsultas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                return false;
             }
         });
 
@@ -82,39 +73,24 @@ public class FragmentAgenda extends Fragment {
         return agenda;
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-
-        new MenuInflater(getContext()).inflate(R.menu.menu_long_agenda, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.menu_long_cancel:
-                Toast.makeText(getContext(), "Apertou o cancelar...", Toast.LENGTH_LONG).show();
-                break;
-        }
-        return super.onContextItemSelected(item);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void carregaLista() {
         consultas = new ArrayList<>();
-    }
-
-    private void carregaLista(final ListView listConsultas) {
-        Log.d("Agenda", "Inicio da busca...");
+        final ListView listConsultas = (ListView) agenda.findViewById(R.id.listConsultas);
         new FirebaseUtilDB().readRTDB("consultas", Consulta.class, new FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
                 Consulta consulta = (Consulta) obj;
-                Log.d("Agenda", "Achei um...");
                 consultas.add(consulta);
-                listConsultas.setAdapter(new ConsultaAdapter(getContext(), consultas));
+                ConsultaAdapter adapter = new ConsultaAdapter(getContext(), consultas);
+                adapter.setListener(new ConsultaAdapter.Update() {
+                    @Override
+                    public void update() {
+                        carregaLista();
+                    }
+                });
+                listConsultas.setAdapter(adapter);
             }
         });
     }
+
 }

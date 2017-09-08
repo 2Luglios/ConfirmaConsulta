@@ -128,8 +128,10 @@ public class Preferencias {
 
     public Set<String> converteListStringToSetString(List<String> lista) {
         Set<String> set = new HashSet<>();
-        for(String s : lista) {
-            set.add(s);
+        if ( lista != null ) {
+            for(String s : lista) {
+                set.add(s);
+            }
         }
         return set;
     }

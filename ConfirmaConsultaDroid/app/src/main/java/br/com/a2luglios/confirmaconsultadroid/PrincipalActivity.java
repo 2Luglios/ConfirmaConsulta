@@ -1,5 +1,11 @@
 package br.com.a2luglios.confirmaconsultadroid;
 
+import android.*;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,12 +18,20 @@ import br.com.a2luglios.confirmaconsultadroid.fragment.FragmentNotificacoes;
 
 public class PrincipalActivity extends AppCompatActivity {
 
+    private static final String[] permissions = {Manifest.permission.WRITE_CALENDAR};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal_layout);
 
         PrincipalActivity.this.setTitle("Agenda");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(permissions, 101);
+            }
+        }
 
         FragmentTransaction transaction =
                 getSupportFragmentManager().beginTransaction();
@@ -65,5 +79,9 @@ public class PrincipalActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
 }

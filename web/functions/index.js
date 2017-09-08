@@ -4,6 +4,7 @@
 // ********************************
 
 const functions = require('firebase-functions');
+const gcs = require('@google-cloud/storage')();
 var firebase = require('firebase');
 var request = require('request');
 var dateFormat = require('dateformat');
@@ -11,20 +12,25 @@ var dateFormat = require('dateformat');
 var serviceAccount = require("./confirmaconsulta-63f26-firebase-adminsdk-29x0s-5f23cec972.json");
 var API_KEY = "AAAACdA7eJU:APA91bEkS6yWa8DIQwD9yIlNAi502yLAI2dPZrJwtK0WVf_XKAb2sWMVwZn5c6FP5mHW5bxLd5J1D9EJw4HhOSsZqJw-AnmD7jeaXV3DR06aWrcHYwq1kKsu_STLZoHjTGOKMaUp5hR3";
 
-firebase.initializeApp({
+var app = firebase.initializeApp({
+//  apiKey: API_KEY,
+  authDomain: "confirmaconsulta-63f26.firebaseapp.com",
   appName: "ConfirmaConsulta",
   credential: "./google-services.json",
-  databaseURL: "https://confirmaconsulta-63f26.firebaseio.com"
+  databaseURL: "https://confirmaconsulta-63f26.firebaseio.com",
+  apiKey: "AIzaSyDmR3P5F8b7KD2omh4RrUfBSNL4cvsEuBU",
+  projectId: "confirmaconsulta-63f26",
+  storageBucket: "confirmaconsulta-63f26.appspot.com",
+  messagingSenderId: "42148264085"
 });
 
-var ref = firebase.app().database();
+var databaseRef = app.database();
 
 // ********************************
 // * Data: 22/07/2017
 // * Mensagens
 // ********************************
 
-//exports.mensagemSend = functions.https.onRequest((req, res) => {
 exports.sendMSG = functions.https.onRequest((req, res) => {
   if (req.query.origem === undefined) {
     res.status(400).send('No user defined!');
@@ -37,8 +43,7 @@ exports.sendMSG = functions.https.onRequest((req, res) => {
       var now = new Date();
       var formatDate = dateFormat(now, "dd/mm/yyyy HH:MM:ss");
 
-      var mensagensRef = ref.ref('mensagens');
-      mensagensRef.push({ 
+      databaseRef.ref('mensagens').push({ 
         origem: origem,
         data: formatDate,
         destino: destino,
@@ -52,8 +57,7 @@ exports.sendMSG = functions.https.onRequest((req, res) => {
 });
 
 exports.mensagemList = functions.https.onRequest((req, res) => {
-  var ref = firebase.app().database().ref('mensagens');
-  ref.once('value').then(function (snap) {
+  databaseRef.ref('mensagens').once('value').then(function (snap) {
     res.status(200).send(snap.val());
   });
 });
@@ -111,3 +115,9 @@ function sendMessageToDevice(origem, destino, mensagem, onSuccess) {
         }
     });
 }
+
+
+
+
+
+

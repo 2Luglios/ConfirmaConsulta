@@ -1,17 +1,14 @@
 package br.com.a2luglios.confirmaconsultadroid.firebase;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 
 
 /**
@@ -34,9 +31,9 @@ public class FirebaseUtilAuth {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            loginInterface.toDo(mAuth.getCurrentUser());
+                            loginInterface.onSuccess(mAuth.getCurrentUser());
                         } else {
-                            loginInterface.erro("Falha ao criar usuário: " + task.getException().getMessage());
+                            loginInterface.onError("Falha ao criar usuário: " + task.getException().getMessage());
                         }
                     }
                 });
@@ -48,9 +45,9 @@ public class FirebaseUtilAuth {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            loginInterface.toDo(mAuth.getCurrentUser());
+                            loginInterface.onSuccess(mAuth.getCurrentUser());
                         } else {
-                            loginInterface.erro("Falha de autenticao: " + task.getException().getMessage());
+                            loginInterface.onError("Falha de autenticao: " + task.getException().getMessage());
                         }
                     }
                 });
@@ -64,5 +61,19 @@ public class FirebaseUtilAuth {
     public boolean isConnected() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         return currentUser != null;
+    }
+
+    public void alteraSenha(String novaSenha) {
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        user.updatePassword(novaSenha)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+
+                        }
+                    }
+                });
     }
 }
