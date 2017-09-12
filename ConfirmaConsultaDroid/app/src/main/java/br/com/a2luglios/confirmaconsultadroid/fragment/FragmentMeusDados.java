@@ -162,6 +162,10 @@ public class FragmentMeusDados extends Fragment {
             mudaEstado(checkSouMedico.isChecked());
         } else {
             usuario = new Usuario();
+
+            selectedConsultoriosItems = new ArrayList<>();
+            selectedPlanosItems = new ArrayList<>();
+            selectedEspecialidadesItems = new ArrayList<>();
         }
 
         checkSouMedico.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

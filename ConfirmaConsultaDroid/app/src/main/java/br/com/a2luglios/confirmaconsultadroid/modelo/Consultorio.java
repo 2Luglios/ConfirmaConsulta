@@ -1,5 +1,6 @@
 package br.com.a2luglios.confirmaconsultadroid.modelo;
 
+import java.util.List;
 import java.util.Map;
 
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
@@ -16,6 +17,8 @@ public class Consultorio implements FirebaseUtilDB.FirebaseRTDBModel, FirebaseUt
     private String nome;
     private Map<String, Object> contato;
     private Map<String, Object> endereco;
+    private List<String> especialidades;
+    private List<String> planos;
     private String obs;
 
     public Long getId() {
@@ -68,6 +71,22 @@ public class Consultorio implements FirebaseUtilDB.FirebaseRTDBModel, FirebaseUt
 
     public void setEndereco(Map<String, Object> endereco) {
         this.endereco = endereco;
+    }
+
+    public List<String> getEspecialidades() {
+        return especialidades;
+    }
+
+    public void setEspecialidades(List<String> especialidades) {
+        this.especialidades = especialidades;
+    }
+
+    public List<String> getPlanos() {
+        return planos;
+    }
+
+    public void setPlanos(List<String> planos) {
+        this.planos = planos;
     }
 
     public String getObs() {

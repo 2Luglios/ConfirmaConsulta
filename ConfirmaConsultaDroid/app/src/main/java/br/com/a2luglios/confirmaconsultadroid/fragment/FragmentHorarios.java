@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -51,6 +52,7 @@ public class FragmentHorarios extends Fragment {
     public List<Consulta> consultas;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+    private ProgressBar progressLoagind;
 
     @Nullable
     @Override
@@ -62,9 +64,12 @@ public class FragmentHorarios extends Fragment {
         c.setTimeInMillis(data);
 
         View v = inflater.inflate(R.layout.fragment_horarios, null);
+
+        progressLoagind = (ProgressBar) v.findViewById(R.id.progressLoading);
+
         mWeekView = (WeekView) v.findViewById(R.id.weekView);
 
-        new FirebaseUtilDB().readRTDBConsultas("consultas", new FirebaseUtilDB.FirebaseRTDBUpdateLista<Consulta>() {
+        new FirebaseUtilDB().readRTDBConsultas(new FirebaseUtilDB.FirebaseRTDBUpdateLista<Consulta>() {
             @Override
             public void updateConsultas(List<Consulta> consultas) {
                 FragmentHorarios.this.consultas = consultas;
@@ -86,6 +91,8 @@ public class FragmentHorarios extends Fragment {
                     events.add(event);
                 }
                 mWeekView.notifyDatasetChanged();
+
+                progressLoagind.setIndeterminate(false);
             }
         });
 
@@ -231,8 +238,9 @@ public class FragmentHorarios extends Fragment {
                 consulta.setConfirmacao(Confirmacao.Solicitado);
                 consulta.setDataInicio(inicio.getTimeInMillis());
                 consulta.setDataTermino(fim.getTimeInMillis());
-                consulta.setProcedimento(spinnerProcedimento.getSelectedItem().toString());
-
+                if ( spinnerProcedimento.getSelectedItem() != null ) {
+                    consulta.setProcedimento(spinnerProcedimento.getSelectedItem().toString());
+                }
                 new CalendarioUtil(getContext()).addEvento(consulta);
 
                 publicaConsultaNoBanco(consulta);

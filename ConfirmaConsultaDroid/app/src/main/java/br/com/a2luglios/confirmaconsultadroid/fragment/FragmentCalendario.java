@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.squareup.timessquare.CalendarCellDecorator;
 import com.squareup.timessquare.CalendarCellView;
@@ -43,10 +44,14 @@ public class FragmentCalendario extends Fragment {
     private List<CalendarCellDecorator> decorators = new ArrayList<>();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
+    private ProgressBar progressLoagind;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_calendario, null);
+
+        progressLoagind = (ProgressBar) v.findViewById(R.id.progressLoading);
 
         calendar = (CalendarPickerView) v.findViewById(R.id.calendar_view);
         decorators.add(new CalendarCellDecorator() {
@@ -64,27 +69,30 @@ public class FragmentCalendario extends Fragment {
         });
         calendar.setDecorators(decorators);
 
-        new FirebaseUtilDB().readRTDB("consultas", Consulta.class, new FirebaseUtilDB.FirebaseRTDBUpdate() {
+        new FirebaseUtilDB().readRTDBConsultas(new FirebaseUtilDB.FirebaseRTDBUpdateLista<Consulta>() {
             @Override
-            public void updateMensagem(Object obj) {
-                Consulta consulta = (Consulta) obj;
-                final Calendar c = Calendar.getInstance();
-                c.setTimeInMillis(consulta.getDataInicio());
-                decorators.add(new CalendarCellDecorator(){
-                    @Override
-                    public void decorate(CalendarCellView cellView, Date date) {
-                        Calendar data = Calendar.getInstance();
-                        data.setTime(date);
+            public void updateConsultas(List<Consulta> lista) {
+                for ( Consulta consulta : lista) {
+                    final Calendar c = Calendar.getInstance();
+                    c.setTimeInMillis(consulta.getDataInicio());
+                    decorators.add(new CalendarCellDecorator(){
+                        @Override
+                        public void decorate(CalendarCellView cellView, Date date) {
+                            Calendar data = Calendar.getInstance();
+                            data.setTime(date);
 
-                        if ( c.get(Calendar.DAY_OF_MONTH) == data.get(Calendar.DAY_OF_MONTH) &&
-                                c.get(Calendar.MONTH) == data.get(Calendar.MONTH) &&
-                                c.get(Calendar.YEAR) == data.get(Calendar.YEAR) ) {
-                            cellView.getDayOfMonthTextView().setBackgroundColor(0xCECECE);
+                            if ( c.get(Calendar.DAY_OF_MONTH) == data.get(Calendar.DAY_OF_MONTH) &&
+                                    c.get(Calendar.MONTH) == data.get(Calendar.MONTH) &&
+                                    c.get(Calendar.YEAR) == data.get(Calendar.YEAR) ) {
+                                cellView.getDayOfMonthTextView().setBackgroundColor(0xCECECE);
+                            }
                         }
-                    }
-                });
+                    });
+                }
 
                 calendar.setDecorators(decorators);
+
+                progressLoagind.setIndeterminate(false);
             }
         });
 
