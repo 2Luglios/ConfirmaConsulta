@@ -59,6 +59,8 @@ public class FragmentBusca extends Fragment {
                 selecionouMedicos = false;
                 selecionouConsultorios = false;
 
+                progressLoagind.setIndeterminate(true);
+
                 buscarConsultorios(especialidades.getSelectedItem().toString());
                 buscarMedicos(especialidades.getSelectedItem().toString());
             }
@@ -75,6 +77,9 @@ public class FragmentBusca extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 selecionouMedicos = false;
                 selecionouConsultorios = true;
+
+                progressLoagind.setIndeterminate(true);
+
                 buscarMedicos(especialidades.getSelectedItem().toString(),
                         ((Consultorio)consultorios.getSelectedItem()).getHash());
             }

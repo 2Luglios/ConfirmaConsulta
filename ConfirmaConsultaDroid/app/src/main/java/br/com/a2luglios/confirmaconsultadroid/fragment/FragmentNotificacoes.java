@@ -53,18 +53,15 @@ public class FragmentNotificacoes extends Fragment {
             @Override
             public void updateConsultas(final List<Mensagem> novaLista) {
                 lista.addAll(novaLista);
-                carregaTudao();
-                progressLoagind.setIndeterminate(false);
-            }
-        });
-
-        new FirebaseUtilDB().readRTDBMensagens(FirebaseInstanceId.getInstance().getToken(),
-                new FirebaseUtilDB.FirebaseRTDBUpdateLista<Mensagem>() {
-            @Override
-            public void updateConsultas(List<Mensagem> novaLista) {
-                lista.addAll(novaLista);
-                carregaTudao();
-                progressLoagind.setIndeterminate(false);
+                new FirebaseUtilDB().readRTDBMensagens(FirebaseInstanceId.getInstance().getToken(),
+                        new FirebaseUtilDB.FirebaseRTDBUpdateLista<Mensagem>() {
+                            @Override
+                            public void updateConsultas(List<Mensagem> novaLista) {
+                                lista.addAll(novaLista);
+                                carregaTudao();
+                                progressLoagind.setIndeterminate(false);
+                            }
+                        });
             }
         });
 

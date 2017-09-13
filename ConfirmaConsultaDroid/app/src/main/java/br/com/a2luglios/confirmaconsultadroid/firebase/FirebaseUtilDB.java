@@ -159,10 +159,8 @@ public class FirebaseUtilDB {
     }
 
     public void readRTDBMensagens(String filtro, final FirebaseRTDBUpdateLista<Mensagem> listaUpdate){
-        Log.d("FirebaseDB", "Buscando: " + filtro);
         final DatabaseReference myRef = database.getReference("mensagens");
-        Query q = myRef.orderByChild("destino");
-        q.equalTo(filtro);
+        Query q = myRef.orderByChild("destino").equalTo(filtro);
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

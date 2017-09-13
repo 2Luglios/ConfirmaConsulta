@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
@@ -81,6 +82,12 @@ public class FragmentAgenda extends Fragment {
             @Override
             public void updateConsultas(List<Consulta> lista) {
                 consultas = lista;
+                consultas.sort(new Comparator<Consulta>() {
+                    @Override
+                    public int compare(Consulta consulta1, Consulta consulta2) {
+                        return (int) (consulta1.getDataInicio() - consulta2.getDataInicio());
+                    }
+                });
                 ConsultaAdapter adapter = new ConsultaAdapter(getContext(), consultas);
                 adapter.setListener(new ConsultaAdapter.Update() {
                     @Override
