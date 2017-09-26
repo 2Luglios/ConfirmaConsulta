@@ -1,31 +1,21 @@
 package br.com.a2luglios.confirmaconsultadroid.modelo;
 
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBModel;
+import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 
 /**
  * Created by ettoreluglio on 12/08/17.
  */
 
-public class Mensagem implements FirebaseRTDBModel {
+public class Mensagem implements FirebaseUtilDB.FirebaseRTDBModel {
 
-    private Long id;
     private String hash;
     private String origem;
     private String destino;
-    private String data;
+    private long data;
     private String mensagem;
     private String tipo;
-    private String estado;
     private long validade;
     private String imagem;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getHash() {
         return hash;
@@ -51,11 +41,11 @@ public class Mensagem implements FirebaseRTDBModel {
         this.destino = destino;
     }
 
-    public String getData() {
+    public long getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(long data) {
         this.data = data;
     }
 
@@ -73,14 +63,6 @@ public class Mensagem implements FirebaseRTDBModel {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public long getValidade() {

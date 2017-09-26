@@ -10,7 +10,6 @@
         android:id="@+id/imgImagem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"
         android:padding="5dp"
         app:srcCompat="@drawable/meus_dados" />
 

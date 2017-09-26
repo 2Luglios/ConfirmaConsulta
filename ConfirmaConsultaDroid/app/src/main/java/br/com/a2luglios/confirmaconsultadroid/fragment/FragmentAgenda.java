@@ -15,15 +15,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.R;
 import br.com.a2luglios.confirmaconsultadroid.adapter.ConsultaAdapter;
 
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Consulta;
 
@@ -35,15 +36,15 @@ public class FragmentAgenda extends Fragment {
 
     private List<Consulta> consultas;
     private View agenda;
+    private ProgressBar progressLoagind;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        agenda =
-                inflater.inflate(R.layout.fragment_agenda,
-                        container, false);
+        agenda = inflater.inflate(R.layout.fragment_agenda, container, false);
+        progressLoagind = (ProgressBar) agenda.findViewById(R.id.progressLoading);
 
         final ListView listConsultas = (ListView) agenda.findViewById(R.id.listConsultas);
         carregaLista();
@@ -76,11 +77,17 @@ public class FragmentAgenda extends Fragment {
     private void carregaLista() {
         consultas = new ArrayList<>();
         final ListView listConsultas = (ListView) agenda.findViewById(R.id.listConsultas);
-        new FirebaseUtilDB().readRTDB("consultas", Consulta.class, new FirebaseRTDBUpdate() {
+
+        new FirebaseUtilDB().readRTDBConsultas(new FirebaseUtilDB.FirebaseRTDBUpdateLista<Consulta>() {
             @Override
-            public void updateMensagem(Object obj) {
-                Consulta consulta = (Consulta) obj;
-                consultas.add(consulta);
+            public void updateConsultas(List<Consulta> lista) {
+                consultas = lista;
+                consultas.sort(new Comparator<Consulta>() {
+                    @Override
+                    public int compare(Consulta consulta1, Consulta consulta2) {
+                        return (int) (consulta1.getDataInicio() - consulta2.getDataInicio());
+                    }
+                });
                 ConsultaAdapter adapter = new ConsultaAdapter(getContext(), consultas);
                 adapter.setListener(new ConsultaAdapter.Update() {
                     @Override
@@ -89,6 +96,7 @@ public class FragmentAgenda extends Fragment {
                     }
                 });
                 listConsultas.setAdapter(adapter);
+                progressLoagind.setIndeterminate(false);
             }
         });
     }

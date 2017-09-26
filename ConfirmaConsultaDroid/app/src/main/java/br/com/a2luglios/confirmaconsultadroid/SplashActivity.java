@@ -1,16 +1,12 @@
 package br.com.a2luglios.confirmaconsultadroid;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
+import java.util.Set;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -19,7 +15,10 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_layout);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        getSupportActionBar().hide();
+
+        //        // Habilita Persistência
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         new Thread(new Runnable() {
             @Override
@@ -30,7 +29,16 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                Bundle bundle = getIntent().getExtras();
+//                if ( bundle != null ) {
+//                    Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+//                    intent.putExtra("from", bundle.getString("from"));
+//                    intent.putExtra("body", bundle.getString("body"));
+//                    startActivity(intent);
+//                } else {
+                    Intent principal = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(principal);
+//                }
                 finish();
             }
         }).start();

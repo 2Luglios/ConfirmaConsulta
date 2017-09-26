@@ -34,9 +34,6 @@ import java.util.List;
 
 import br.com.a2luglios.confirmaconsultadroid.PrincipalActivity;
 import br.com.a2luglios.confirmaconsultadroid.R;
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseLoginInterface;
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBSaved;
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseRTDBUpdate;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilAuth;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilDB;
 import br.com.a2luglios.confirmaconsultadroid.modelo.Consultorio;
@@ -165,6 +162,10 @@ public class FragmentMeusDados extends Fragment {
             mudaEstado(checkSouMedico.isChecked());
         } else {
             usuario = new Usuario();
+
+            selectedConsultoriosItems = new ArrayList<>();
+            selectedPlanosItems = new ArrayList<>();
+            selectedEspecialidadesItems = new ArrayList<>();
         }
 
         checkSouMedico.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -191,21 +192,21 @@ public class FragmentMeusDados extends Fragment {
     public void onResume() {
         super.onResume();
 
-        new FirebaseUtilDB().readRTDBPlain("especialidades", new FirebaseRTDBUpdate() {
+        new FirebaseUtilDB().readRTDBPlain("especialidades", new FirebaseUtilDB.FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
                 especialidades.add((String) obj);
             }
         });
 
-        new FirebaseUtilDB().readRTDBPlain("planos", new FirebaseRTDBUpdate() {
+        new FirebaseUtilDB().readRTDBPlain("planos", new FirebaseUtilDB.FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
                 planos.add((String) obj);
             }
         });
 
-        new FirebaseUtilDB().readRTDB("consultorios", Consultorio.class, new FirebaseRTDBUpdate() {
+        new FirebaseUtilDB().readRTDB("consultorios", Consultorio.class, new FirebaseUtilDB.FirebaseRTDBUpdate() {
             @Override
             public void updateMensagem(Object obj) {
                 final Consultorio consultorio = (Consultorio) obj;
@@ -235,7 +236,7 @@ public class FragmentMeusDados extends Fragment {
                 } else {
                     if (senha.equals(repitaSenha)) {
                         new FirebaseUtilAuth(getActivity()).criarUsuario(email, senha,
-                                new FirebaseLoginInterface() {
+                                new FirebaseUtilAuth.FirebaseLoginInterface() {
                                     @Override
                                     public void onSuccess(FirebaseUser user) {
                                         salvarUsuario();
@@ -302,7 +303,7 @@ public class FragmentMeusDados extends Fragment {
         usuario.setPlanos(selectedPlanosItems);
         usuario.setConsultorios(selectedConsultoriosItems);
 
-        new FirebaseUtilDB().saveOrUpdate("usuarios", usuario, new FirebaseRTDBSaved() {
+        new FirebaseUtilDB().saveOrUpdate("usuarios", usuario, new FirebaseUtilDB.FirebaseRTDBSaved() {
             @Override
             public void saved() {
                 new Preferencias(getActivity()).setUsuario(usuario);

@@ -10,7 +10,6 @@ import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseUser;
 
-import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseLoginInterface;
 import br.com.a2luglios.confirmaconsultadroid.firebase.FirebaseUtilAuth;
 
 public class LoginActivity extends AppCompatActivity {
@@ -31,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 firebaseUtilAuth.signIn(email.getEditableText().toString(),
                         senha.getEditableText().toString(),
-                        new FirebaseLoginInterface() {
+                        new FirebaseUtilAuth.FirebaseLoginInterface() {
                             @Override
                             public void onSuccess(FirebaseUser user) {
                                 if ( firebaseUtilAuth.isConnected() ) {
