@@ -11,6 +11,9 @@ import { AngularFireModule } from 'angularfire2';
 //Google Material
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConsultorioListComponent } from './consultorios/consultorio-list/consultorio-list.component';
+import { ConsultorioDetailComponent } from './consultorios/consultorio-detail/consultorio-detail.component';
+import { ConsultorioFormComponent } from './consultorios/consultorio-form/consultorio-form.component';
 
  
 export const firebaseConfig = {
@@ -24,7 +27,10 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConsultorioListComponent,
+    ConsultorioDetailComponent,
+    ConsultorioFormComponent
   ],
   imports: [
     BrowserModule,
